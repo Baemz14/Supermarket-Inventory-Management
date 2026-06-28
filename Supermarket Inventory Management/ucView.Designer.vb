@@ -44,6 +44,12 @@ Partial Class ucView
         dgvProducts.RowHeadersWidth = 62
         dgvProducts.Size = New Size(927, 518)
         dgvProducts.TabIndex = 1
+        dgvProducts.ReadOnly = True          ' Prevents users from typing inside cells
+        dgvProducts.AllowUserToAddRows = False  ' Removes the blank * row at the bottom
+        dgvProducts.AllowUserToDeleteRows = False ' Prevents pressing the Delete key from breaking rows
+        dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect ' Highlights the entire row instead of single cells
+        dgvProducts.MultiSelect = False
+        dgvProducts.RowHeadersVisible = False
         ' 
         ' ucView
         ' 

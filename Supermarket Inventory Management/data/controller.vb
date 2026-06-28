@@ -1,12 +1,89 @@
 ﻿Imports System.Data.SQLite
+Imports System.Net
+Imports System.Security.Cryptography
+Imports System.Text
 
 Module ProductController
+
+    Public Function IsEmpNameExist(name As String) As Boolean
+        Using conn As SQLiteConnection = GetConnection()
+            Dim query As String = "SELECT COUNT(*) FROM employee WHERE employee_name = @Name"
+
+            Using cmd As New SQLiteCommand(query, conn)
+                cmd.Parameters.AddWithValue("@Name", name.Trim())
+
+                Try
+                    conn.Open()
+                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                    Return count > 0
+
+                Catch ex As Exception
+                    Throw New Exception("System Error checking username: " & ex.Message)
+                End Try
+            End Using
+        End Using
+    End Function
+
+    Public Function RegisterEmployee(name As String, password As String) As Boolean
+        If IsEmpNameExist(name) Then
+            Return False
+        End If
+
+        Using conn As SQLiteConnection = GetConnection()
+            Dim query As String = "INSERT INTO employee (employee_name, employee_pass_hash) VALUES (@Name, @Password)"
+
+            Using cmd As New SQLiteCommand(query, conn)
+                cmd.Parameters.AddWithValue("@Name", name.Trim())
+                cmd.Parameters.AddWithValue("@Password", HashPassword(password))
+
+                Try
+                    conn.Open()
+                    Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                    Return rowsAffected > 0
+
+                Catch ex As Exception
+                    Throw New Exception("Database Error during registration: " & ex.Message)
+                End Try
+            End Using
+        End Using
+    End Function
+
+    Public Function LoginEmployee(name As String, password As String) As Integer
+        If String.IsNullOrWhiteSpace(name) OrElse String.IsNullOrWhiteSpace(password) Then
+            Return -1
+        End If
+
+        Using conn As SQLiteConnection = GetConnection()
+            Dim query As String = "SELECT employee_id, employee_pass_hash FROM employee WHERE employee_name = @Name"
+
+            Using cmd As New SQLiteCommand(query, conn)
+                cmd.Parameters.AddWithValue("@Name", name.Trim())
+
+                Try
+                    conn.Open()
+
+                    Using reader As SQLiteDataReader = cmd.ExecuteReader()
+                        If reader.Read() Then
+                            Dim storedHash As String = reader("employee_pass_hash").ToString()
+                            If CompareHash(password, storedHash) Then
+                                Return Convert.ToInt32(reader("employee_id"))
+                            End If
+                        End If
+                    End Using
+                    Return -1
+
+                Catch ex As Exception
+                    Throw New Exception("System Error during login validation: " & ex.Message)
+                End Try
+            End Using
+        End Using
+    End Function
 
     Public Function GetAllProducts() As DataTable
         Dim dt As New DataTable()
         Using conn As SQLiteConnection = GetConnection()
             Dim query As String = "SELECT p.product_id, p.product_name, " &
-                             "c.category_name, s.supplier_name, " &
+                             "c.category_name as category, s.supplier_name as supplier, " &
                              "p.unit_price, p.quantity, p.unit, p.reorder_treshold, " &
                              "p.bulk_quantity, p.bulk_discount_rate " &
                              "FROM product p " &
@@ -147,6 +224,29 @@ Module ProductController
         End Using
     End Function
 
+    Public Function IsEmpIdExist(id As Integer) As Boolean
+        Using conn As SQLiteConnection = GetConnection()
+            Dim query As String = "SELECT COUNT(*) FROM employee WHERE employee_id = @Id"
+
+            Using cmd As New SQLiteCommand(query, conn)
+                cmd.Parameters.AddWithValue("@Id", id)
+
+                Try
+                    conn.Open()
+
+                    ' 1. Use ExecuteScalar because we are retrieving a count number
+                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+
+                    ' 2. If the count is greater than 0, the ID exists!
+                    Return count > 0
+
+                Catch ex As Exception
+                    Throw New Exception("System Error: " & ex.Message)
+                End Try
+            End Using
+        End Using
+    End Function
+
     Public Sub DebugPrintDataTable(dt As DataTable)
         Console.WriteLine("=== START OF DATATABLE CONSOLE DUMP ===")
 
@@ -164,5 +264,34 @@ Module ProductController
 
         Console.WriteLine("=== END OF DATATABLE CONSOLE DUMP ===")
     End Sub
+
+    Public Function HashPassword(password As String) As String
+        ' Convert the plain text password string into an array of raw bytes
+        Dim passwordBytes As Byte() = Encoding.UTF8.GetBytes(password)
+
+        ' Compute the SHA256 hash representation of those bytes
+        Dim hashedBytes As Byte() = SHA256.HashData(passwordBytes)
+
+        ' Convert the resulting byte array back into a readable Hexadecimal string
+        Dim sb As New StringBuilder()
+        For i As Integer = 0 To hashedBytes.Length - 1
+            sb.Append(hashedBytes(i).ToString("x2"))
+        Next
+
+        Return sb.ToString()
+    End Function
+
+    Public Function CompareHash(password As String, storedHash As String) As Boolean
+        ' If either field is empty, it's an immediate failure
+        If String.IsNullOrEmpty(password) OrElse String.IsNullOrEmpty(storedHash) Then
+            Return False
+        End If
+
+        ' Hash the incoming plain text login attempt using your existing function
+        Dim inputHash As String = HashPassword(password)
+
+        ' Perform a case-insensitive string comparison to avoid any minor hex casing bugs
+        Return String.Equals(inputHash, storedHash, StringComparison.OrdinalIgnoreCase)
+    End Function
 
 End Module

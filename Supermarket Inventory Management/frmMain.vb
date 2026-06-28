@@ -1,4 +1,21 @@
 ﻿Public Class frmMain
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Not SessionManager.IsLoggedIn Then
+            Using loginWindow As New frmLogin()
+                Dim authResult As DialogResult = loginWindow.ShowDialog()
+                If authResult = DialogResult.OK Then
+                    SwitchScreen(New ucDashboard)
+                Else
+                    Application.Exit()
+                End If
+
+            End Using
+            Return
+        End If
+
+        SwitchScreen(New ucDashboard)
+    End Sub
+
     Private Sub SwitchScreen(ByVal selectedUC As UserControl)
         pnlContent.Controls.Clear()
         selectedUC.Dock = DockStyle.Fill
@@ -18,7 +35,11 @@
         SwitchScreen(New ucProductForm)
     End Sub
 
-    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SwitchScreen(New ucDashboard)
+    Private Sub mnuLogout_Click(sender As Object, e As EventArgs) Handles mnuLogout.Click
+        SessionManager.Logout()
+        Me.Hide()
+        Dim freshForm As New frmMain()
+        freshForm.Show()
+        Me.Close()
     End Sub
 End Class

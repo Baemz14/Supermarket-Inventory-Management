@@ -27,13 +27,14 @@ Partial Class frmMain
         mnuView = New ToolStripMenuItem()
         mnuAddProduct = New ToolStripMenuItem()
         pnlContent = New Panel()
+        mnuLogout = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' MenuStrip1
         ' 
         MenuStrip1.ImageScalingSize = New Size(24, 24)
-        MenuStrip1.Items.AddRange(New ToolStripItem() {mnuDashboard, mnuView, mnuAddProduct})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {mnuDashboard, mnuView, mnuAddProduct, mnuLogout})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
         MenuStrip1.Size = New Size(1024, 33)
@@ -66,6 +67,12 @@ Partial Class frmMain
         pnlContent.Size = New Size(1024, 639)
         pnlContent.TabIndex = 1
         ' 
+        ' mnuLogout
+        ' 
+        mnuLogout.Name = "mnuLogout"
+        mnuLogout.Size = New Size(85, 29)
+        mnuLogout.Text = "Logout"
+        ' 
         ' frmMain
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
@@ -85,11 +92,10 @@ Partial Class frmMain
     End Sub
 
     Friend WithEvents MenuStrip1 As MenuStrip
-    Friend WithEvents DashboardToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ViewInventoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuAddProduct As ToolStripMenuItem
     Friend WithEvents mnuDashboard As ToolStripMenuItem
     Friend WithEvents mnuView As ToolStripMenuItem
     Friend WithEvents pnlContent As Panel
+    Friend WithEvents mnuLogout As ToolStripMenuItem
 
 End Class
