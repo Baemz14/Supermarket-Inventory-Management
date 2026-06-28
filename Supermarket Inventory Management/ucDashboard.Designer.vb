@@ -50,8 +50,9 @@ Partial Class ucDashboard
         AutoScaleMode = AutoScaleMode.Font
         Controls.Add(Button1)
         Controls.Add(Label1)
+        MinimumSize = New Size(1024, 728)
         Name = "ucDashboard"
-        Size = New Size(678, 388)
+        Size = New Size(1024, 728)
         ResumeLayout(False)
         PerformLayout()
     End Sub

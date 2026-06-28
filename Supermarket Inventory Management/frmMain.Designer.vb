@@ -63,18 +63,20 @@ Partial Class frmMain
         pnlContent.Dock = DockStyle.Fill
         pnlContent.Location = New Point(0, 33)
         pnlContent.Name = "pnlContent"
-        pnlContent.Size = New Size(1024, 587)
+        pnlContent.Size = New Size(1024, 639)
         pnlContent.TabIndex = 1
         ' 
         ' frmMain
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1024, 620)
+        ClientSize = New Size(1024, 672)
         Controls.Add(pnlContent)
         Controls.Add(MenuStrip1)
         MainMenuStrip = MenuStrip1
+        MinimumSize = New Size(1024, 728)
         Name = "frmMain"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
         MenuStrip1.ResumeLayout(False)
         MenuStrip1.PerformLayout()

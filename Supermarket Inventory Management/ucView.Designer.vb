@@ -23,6 +23,8 @@ Partial Class ucView
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Label1 = New Label()
+        dgvProducts = New DataGridView()
+        CType(dgvProducts, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Label1
@@ -34,17 +36,30 @@ Partial Class ucView
         Label1.TabIndex = 0
         Label1.Text = "View Inventory"
         ' 
+        ' dgvProducts
+        ' 
+        dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvProducts.Location = New Point(43, 116)
+        dgvProducts.Name = "dgvProducts"
+        dgvProducts.RowHeadersWidth = 62
+        dgvProducts.Size = New Size(927, 518)
+        dgvProducts.TabIndex = 1
+        ' 
         ' ucView
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
+        Controls.Add(dgvProducts)
         Controls.Add(Label1)
+        MinimumSize = New Size(1024, 728)
         Name = "ucView"
-        Size = New Size(544, 357)
+        Size = New Size(1024, 728)
+        CType(dgvProducts, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
 
     Friend WithEvents Label1 As Label
+    Friend WithEvents dgvProducts As DataGridView
 
 End Class
