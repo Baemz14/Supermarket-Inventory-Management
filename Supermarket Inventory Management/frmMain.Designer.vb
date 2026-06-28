@@ -22,10 +22,72 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
+        MenuStrip1 = New MenuStrip()
+        mnuDashboard = New ToolStripMenuItem()
+        mnuView = New ToolStripMenuItem()
+        mnuAddProduct = New ToolStripMenuItem()
+        pnlContent = New Panel()
+        MenuStrip1.SuspendLayout()
+        SuspendLayout()
+        ' 
+        ' MenuStrip1
+        ' 
+        MenuStrip1.ImageScalingSize = New Size(24, 24)
+        MenuStrip1.Items.AddRange(New ToolStripItem() {mnuDashboard, mnuView, mnuAddProduct})
+        MenuStrip1.Location = New Point(0, 0)
+        MenuStrip1.Name = "MenuStrip1"
+        MenuStrip1.Size = New Size(1024, 33)
+        MenuStrip1.TabIndex = 0
+        MenuStrip1.Text = "MenuStrip1"
+        ' 
+        ' mnuDashboard
+        ' 
+        mnuDashboard.Name = "mnuDashboard"
+        mnuDashboard.Size = New Size(116, 29)
+        mnuDashboard.Text = "Dashboard"
+        ' 
+        ' mnuView
+        ' 
+        mnuView.Name = "mnuView"
+        mnuView.Size = New Size(145, 29)
+        mnuView.Text = "View Inventory"
+        ' 
+        ' mnuAddProduct
+        ' 
+        mnuAddProduct.Name = "mnuAddProduct"
+        mnuAddProduct.Size = New Size(129, 29)
+        mnuAddProduct.Text = "Add Product"
+        ' 
+        ' pnlContent
+        ' 
+        pnlContent.Dock = DockStyle.Fill
+        pnlContent.Location = New Point(0, 33)
+        pnlContent.Name = "pnlContent"
+        pnlContent.Size = New Size(1024, 587)
+        pnlContent.TabIndex = 1
+        ' 
+        ' frmMain
+        ' 
+        AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 450)
+        ClientSize = New Size(1024, 620)
+        Controls.Add(pnlContent)
+        Controls.Add(MenuStrip1)
+        MainMenuStrip = MenuStrip1
+        Name = "frmMain"
         Text = "Form1"
+        MenuStrip1.ResumeLayout(False)
+        MenuStrip1.PerformLayout()
+        ResumeLayout(False)
+        PerformLayout()
     End Sub
+
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents DashboardToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ViewInventoryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuAddProduct As ToolStripMenuItem
+    Friend WithEvents mnuDashboard As ToolStripMenuItem
+    Friend WithEvents mnuView As ToolStripMenuItem
+    Friend WithEvents pnlContent As Panel
 
 End Class
