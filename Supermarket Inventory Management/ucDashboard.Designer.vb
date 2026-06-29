@@ -24,12 +24,13 @@ Partial Class ucDashboard
     Private Sub InitializeComponent()
         Label1 = New Label()
         Button1 = New Button()
+        lblUsername = New Label()
         SuspendLayout()
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(47, 35)
+        Label1.Location = New Point(52, 38)
         Label1.Name = "Label1"
         Label1.Size = New Size(100, 25)
         Label1.TabIndex = 0
@@ -37,17 +38,27 @@ Partial Class ucDashboard
         ' 
         ' Button1
         ' 
-        Button1.Location = New Point(80, 134)
+        Button1.Location = New Point(434, 414)
         Button1.Name = "Button1"
         Button1.Size = New Size(112, 34)
         Button1.TabIndex = 1
         Button1.Text = "Henlo"
         Button1.UseVisualStyleBackColor = True
         ' 
+        ' lblUsername
+        ' 
+        lblUsername.AutoSize = True
+        lblUsername.Location = New Point(450, 145)
+        lblUsername.Name = "lblUsername"
+        lblUsername.Size = New Size(56, 25)
+        lblUsername.TabIndex = 2
+        lblUsername.Text = "name"
+        ' 
         ' ucDashboard
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
+        Controls.Add(lblUsername)
         Controls.Add(Button1)
         Controls.Add(Label1)
         MinimumSize = New Size(1024, 728)
@@ -59,5 +70,6 @@ Partial Class ucDashboard
 
     Friend WithEvents Label1 As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents lblUsername As Label
 
 End Class
