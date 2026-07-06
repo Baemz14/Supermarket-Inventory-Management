@@ -23,29 +23,24 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         MenuStrip1 = New MenuStrip()
-        mnuDashboard = New ToolStripMenuItem()
         mnuView = New ToolStripMenuItem()
         mnuAddProduct = New ToolStripMenuItem()
-        pnlContent = New Panel()
+        EmployeesToolStripMenuItem = New ToolStripMenuItem()
+        mnuDashboard = New ToolStripMenuItem()
         mnuLogout = New ToolStripMenuItem()
+        pnlContent = New Panel()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' MenuStrip1
         ' 
         MenuStrip1.ImageScalingSize = New Size(24, 24)
-        MenuStrip1.Items.AddRange(New ToolStripItem() {mnuDashboard, mnuView, mnuAddProduct, mnuLogout})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {mnuView, mnuAddProduct, EmployeesToolStripMenuItem, mnuDashboard, mnuLogout})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
-        MenuStrip1.Size = New Size(1024, 33)
+        MenuStrip1.Size = New Size(1525, 33)
         MenuStrip1.TabIndex = 0
         MenuStrip1.Text = "MenuStrip1"
-        ' 
-        ' mnuDashboard
-        ' 
-        mnuDashboard.Name = "mnuDashboard"
-        mnuDashboard.Size = New Size(116, 29)
-        mnuDashboard.Text = "Dashboard"
         ' 
         ' mnuView
         ' 
@@ -59,13 +54,17 @@ Partial Class frmMain
         mnuAddProduct.Size = New Size(129, 29)
         mnuAddProduct.Text = "Add Product"
         ' 
-        ' pnlContent
+        ' EmployeesToolStripMenuItem
         ' 
-        pnlContent.Dock = DockStyle.Fill
-        pnlContent.Location = New Point(0, 33)
-        pnlContent.Name = "pnlContent"
-        pnlContent.Size = New Size(1024, 639)
-        pnlContent.TabIndex = 1
+        EmployeesToolStripMenuItem.Name = "EmployeesToolStripMenuItem"
+        EmployeesToolStripMenuItem.Size = New Size(114, 29)
+        EmployeesToolStripMenuItem.Text = "Employees"
+        ' 
+        ' mnuDashboard
+        ' 
+        mnuDashboard.Name = "mnuDashboard"
+        mnuDashboard.Size = New Size(93, 29)
+        mnuDashboard.Text = "Account"
         ' 
         ' mnuLogout
         ' 
@@ -73,15 +72,24 @@ Partial Class frmMain
         mnuLogout.Size = New Size(85, 29)
         mnuLogout.Text = "Logout"
         ' 
+        ' pnlContent
+        ' 
+        pnlContent.AutoScroll = True
+        pnlContent.Dock = DockStyle.Fill
+        pnlContent.Location = New Point(0, 33)
+        pnlContent.Name = "pnlContent"
+        pnlContent.Size = New Size(1525, 924)
+        pnlContent.TabIndex = 1
+        ' 
         ' frmMain
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1024, 672)
+        ClientSize = New Size(1525, 957)
         Controls.Add(pnlContent)
         Controls.Add(MenuStrip1)
         MainMenuStrip = MenuStrip1
-        MinimumSize = New Size(1024, 728)
+        MinimumSize = New Size(1547, 1013)
         Name = "frmMain"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
@@ -97,5 +105,6 @@ Partial Class frmMain
     Friend WithEvents mnuView As ToolStripMenuItem
     Friend WithEvents pnlContent As Panel
     Friend WithEvents mnuLogout As ToolStripMenuItem
+    Friend WithEvents EmployeesToolStripMenuItem As ToolStripMenuItem
 
 End Class

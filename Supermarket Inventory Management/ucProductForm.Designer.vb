@@ -39,9 +39,9 @@ Partial Class ucProductForm
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         Controls.Add(Label1)
-        MinimumSize = New Size(1024, 728)
+        MinimumSize = New Size(1525, 924)
         Name = "ucProductForm"
-        Size = New Size(1024, 728)
+        Size = New Size(1525, 924)
         ResumeLayout(False)
         PerformLayout()
     End Sub

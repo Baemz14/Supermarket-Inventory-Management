@@ -61,9 +61,9 @@ Partial Class ucDashboard
         Controls.Add(lblUsername)
         Controls.Add(Button1)
         Controls.Add(Label1)
-        MinimumSize = New Size(1024, 728)
+        MinimumSize = New Size(1525, 924)
         Name = "ucDashboard"
-        Size = New Size(1024, 728)
+        Size = New Size(1525, 924)
         ResumeLayout(False)
         PerformLayout()
     End Sub

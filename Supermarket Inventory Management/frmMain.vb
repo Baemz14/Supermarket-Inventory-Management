@@ -4,7 +4,7 @@
             Using loginWindow As New frmLogin()
                 Dim authResult As DialogResult = loginWindow.ShowDialog()
                 If authResult = DialogResult.OK Then
-                    SwitchScreen(New ucDashboard)
+                    SwitchScreen(New ucView)
                 Else
                     Application.Exit()
                 End If
@@ -18,7 +18,10 @@
 
     Private Sub SwitchScreen(ByVal selectedUC As UserControl)
         pnlContent.Controls.Clear()
-        selectedUC.Dock = DockStyle.Fill
+        pnlContent.AutoScroll = True
+        selectedUC.Dock = DockStyle.None
+        selectedUC.Size = pnlContent.ClientSize
+        selectedUC.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Bottom
         pnlContent.Controls.Add(selectedUC)
         selectedUC.BringToFront()
     End Sub
