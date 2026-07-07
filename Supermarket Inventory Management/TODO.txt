@@ -1,1 +1,16 @@
 ﻿blah
+
+change reason:
+Sold -
+Arrived +
+Removed -
+Damaged -
+Expired -
+Shrinkage -
+Internal Usage -
+Customer Return +
+Audit Correction +
+
+bulk buy +
+
+price change

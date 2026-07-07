@@ -83,7 +83,7 @@ Module ProductController
         Dim dt As New DataTable()
         Using conn As SQLiteConnection = GetConnection()
             Dim query As String = "SELECT p.product_id, p.product_name, " &
-                             "c.category_name as category, s.supplier_name as supplier, " &
+                             "c.category_name as category, c.tax_rate, s.supplier_name as supplier, " &
                              "p.unit_price, p.quantity, p.unit, p.reorder_treshold, " &
                              "p.bulk_quantity, p.bulk_discount_rate " &
                              "FROM product p " &
