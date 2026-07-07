@@ -1,4 +1,17 @@
-﻿blah
+﻿Notes:
+haram tulis function utk bukak db, baem je buat func db dlm controller.vb
+
+login n register:
+boleh hide/show password
+
+Employee section:
+guna GetAllEmployee()
+guna GetEmployeeChanges()
+
+
+
+
+-------dev notes------
 
 change reason:
 Sold -

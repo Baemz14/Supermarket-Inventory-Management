@@ -79,6 +79,48 @@ Module ProductController
         End Using
     End Function
 
+    Public Function GetAllEmployees() As DataTable
+        Dim dt As New DataTable()
+        Using conn As SQLiteConnection = GetConnection()
+            Dim query As String = "SELECT e.employee_id, e.employee_name, (" &
+                        "SELECT COUNT(*) FROM product_change pc INNER JOIN employee e ON pc.employee_id = e.employee_id" &
+                        ") as 'Changes made'" &
+                        "FROM employee e"
+            Using cmd As New SQLiteCommand(query, conn)
+                Try
+                    conn.Open()
+                    Using da As New SQLiteDataAdapter(cmd)
+                        da.Fill(dt)
+                    End Using
+                Catch ex As Exception
+                    Throw New Exception("Controller Error (GetAllEmployees): " & ex.Message)
+                End Try
+            End Using
+        End Using
+        Return dt
+    End Function
+
+    Public Function GetEmployeeChanges(employeeId As Integer) As DataTable
+        Dim dt As New DataTable()
+        Using conn As SQLiteConnection = GetConnection()
+            Dim query As String = "SELECT pc.*, p.product_name, p.quantity as 'current quantity'" &
+                        "FROM product_change pc" &
+                        "INNER JOIN employee e ON e.employee_id = pc.employee_id" &
+                        "INNER JOIN product p ON pc.product_id = p.product_id"
+            Using cmd As New SQLiteCommand(query, conn)
+                Try
+                    conn.Open()
+                    Using da As New SQLiteDataAdapter(cmd)
+                        da.Fill(dt)
+                    End Using
+                Catch ex As Exception
+                    Throw New Exception("Controller Error (GetAllEmployees): " & ex.Message)
+                End Try
+            End Using
+        End Using
+        Return dt
+    End Function
+
     Public Function GetAllProducts() As DataTable
         Dim dt As New DataTable()
         Using conn As SQLiteConnection = GetConnection()

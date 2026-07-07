@@ -45,4 +45,8 @@
         freshForm.Show()
         Me.Close()
     End Sub
+
+    Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeesToolStripMenuItem.Click
+        SwitchScreen(New ucEmployees)
+    End Sub
 End Class
