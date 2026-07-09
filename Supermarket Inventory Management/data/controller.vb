@@ -102,11 +102,12 @@ Module ProductController
 
     Public Function GetEmployeeChanges(employeeId As Integer) As DataTable
         Dim dt As New DataTable()
+        'TODO make the column names nicer
         Using conn As SQLiteConnection = GetConnection()
-            Dim query As String = "SELECT pc.*, p.product_name, p.quantity as 'current quantity'" &
-                        "FROM product_change pc" &
-                        "INNER JOIN employee e ON e.employee_id = pc.employee_id" &
-                        "INNER JOIN product p ON pc.product_id = p.product_id"
+            Dim query As String = "SELECT pc.*, p.product_name, p.quantity as 'current quantity' " &
+                        "FROM product_change pc " &
+                        "INNER JOIN employee e ON e.employee_id = pc.employee_id " &
+                        "INNER JOIN product p ON pc.product_id = p.product_id "
             Using cmd As New SQLiteCommand(query, conn)
                 Try
                     conn.Open()
@@ -287,6 +288,90 @@ Module ProductController
                 End Try
             End Using
         End Using
+    End Function
+
+    Public Function ChangeProductQuantity(productId As Integer, quantityChange As Decimal, employeeId As Integer, changeDesc As String) As Boolean
+        Dim isSuccess As Boolean = False
+
+        Using conn As SQLiteConnection = GetConnection()
+            Try
+                conn.Open()
+
+                Using transaction As SQLiteTransaction = conn.BeginTransaction()
+
+                    Dim updateQuery As String = "UPDATE product SET quantity = quantity + @Change WHERE product_id = @ProdID"
+
+                    Using updateCmd As New SQLiteCommand(updateQuery, conn, transaction)
+                        updateCmd.Parameters.AddWithValue("@Change", quantityChange)
+                        updateCmd.Parameters.AddWithValue("@ProdID", productId)
+
+                        Dim rowsAffected As Integer = updateCmd.ExecuteNonQuery()
+
+                        If rowsAffected = 0 Then
+                            transaction.Rollback()
+                            Return False
+                        End If
+                    End Using
+
+                    Dim logQuery As String = "INSERT INTO product_change " &
+                                         "(product_id, change_desc, quantity_changed, employee_id, change_datetime, price_changed) " &
+                                         "VALUES (@ProdID, @Desc, @QtyChanged, @EmpID, datetime('now', 'localtime'), 0)"
+
+                    Using logCmd As New SQLiteCommand(logQuery, conn, transaction)
+                        logCmd.Parameters.AddWithValue("@ProdID", productId)
+                        logCmd.Parameters.AddWithValue("@Desc", changeDesc)
+                        logCmd.Parameters.AddWithValue("@QtyChanged", quantityChange)
+                        logCmd.Parameters.AddWithValue("@EmpID", employeeId)
+
+                        logCmd.ExecuteNonQuery()
+                    End Using
+
+                    transaction.Commit()
+                    isSuccess = True
+
+                End Using
+
+            Catch ex As Exception
+                Throw New Exception("Database Ledger Error: Failed to execute stock adjustment. Details: " & ex.Message)
+            End Try
+        End Using
+
+        Return isSuccess
+    End Function
+
+    Public Function ChangeProductPrice(productId As Integer, newPrice As Decimal, employeeId As Integer) As Boolean
+        Dim isSuccess As Boolean = False
+        Using conn As SQLiteConnection = GetConnection()
+            Try
+                conn.Open()
+                Using transaction As SQLiteTransaction = conn.BeginTransaction()
+                    Dim updateQuery As String = "UPDATE product SET unit_price = @NewPrice WHERE product_id = @ProdID"
+                    Using updateCmd As New SQLiteCommand(updateQuery, conn, transaction)
+                        updateCmd.Parameters.AddWithValue("@NewPrice", newPrice)
+                        updateCmd.Parameters.AddWithValue("@ProdID", productId)
+                        Dim rowsAffected As Integer = updateCmd.ExecuteNonQuery()
+                        If rowsAffected = 0 Then
+                            transaction.Rollback()
+                            Return False
+                        End If
+                    End Using
+                    Dim logQuery As String = "INSERT INTO product_change " &
+                                         "(product_id, change_desc, quantity_changed, employee_id, change_datetime, price_changed) " &
+                                         "VALUES (@ProdID, 'Price Change', 0, @EmpID, datetime('now', 'localtime'), @NewPrice)"
+                    Using logCmd As New SQLiteCommand(logQuery, conn, transaction)
+                        logCmd.Parameters.AddWithValue("@ProdID", productId)
+                        logCmd.Parameters.AddWithValue("@EmpID", employeeId)
+                        logCmd.Parameters.AddWithValue("@NewPrice", newPrice)
+                        logCmd.ExecuteNonQuery()
+                    End Using
+                    transaction.Commit()
+                    isSuccess = True
+                End Using
+            Catch ex As Exception
+                Throw New Exception("Database Ledger Error: Failed to execute price adjustment. Details: " & ex.Message)
+            End Try
+        End Using
+        Return isSuccess
     End Function
 
     Public Sub DebugPrintDataTable(dt As DataTable)

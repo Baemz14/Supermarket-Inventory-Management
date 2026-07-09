@@ -3,13 +3,10 @@ haram tulis function utk bukak db, baem je buat func db dlm controller.vb
 
 login n register:
 boleh hide/show password
+bug - bila logout pastu try login semula app closed
 
-Employee section:
-guna GetAllEmployee()
-guna GetEmployeeChanges()
-
-
-
+Controller:
+buat column names dlm GetEmployeeChanges() nicer
 
 -------dev notes------
 
