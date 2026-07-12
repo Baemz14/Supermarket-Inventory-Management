@@ -83,8 +83,8 @@ Module ProductController
         Dim dt As New DataTable()
         Using conn As SQLiteConnection = GetConnection()
             Dim query As String = "SELECT e.employee_id, e.employee_name, (" &
-                        "SELECT COUNT(*) FROM product_change pc INNER JOIN employee e ON pc.employee_id = e.employee_id" &
-                        ") as 'Changes made'" &
+                        "SELECT COUNT(*) FROM product_change pc WHERE pc.employee_id = e.employee_id" &
+                        ") as 'Changes made' " &
                         "FROM employee e"
             Using cmd As New SQLiteCommand(query, conn)
                 Try
@@ -102,20 +102,26 @@ Module ProductController
 
     Public Function GetEmployeeChanges(employeeId As Integer) As DataTable
         Dim dt As New DataTable()
-        'TODO make the column names nicer
         Using conn As SQLiteConnection = GetConnection()
-            Dim query As String = "SELECT pc.*, p.product_name, p.quantity as 'current quantity' " &
+            Dim query As String = "SELECT p.product_name AS 'Product', " &
+                        "pc.change_desc AS 'Reason', " &
+                        "pc.quantity_changed AS 'Qty Changed', " &
+                        "pc.price_changed AS 'New Price', " &
+                        "pc.change_datetime AS 'Date / Time', " &
+                        "p.quantity AS 'Current Qty' " &
                         "FROM product_change pc " &
-                        "INNER JOIN employee e ON e.employee_id = pc.employee_id " &
-                        "INNER JOIN product p ON pc.product_id = p.product_id "
+                        "INNER JOIN product p ON pc.product_id = p.product_id " &
+                        "WHERE pc.employee_id = @EmpId " &
+                        "ORDER BY pc.change_datetime DESC"
             Using cmd As New SQLiteCommand(query, conn)
+                cmd.Parameters.AddWithValue("@EmpId", employeeId)
                 Try
                     conn.Open()
                     Using da As New SQLiteDataAdapter(cmd)
                         da.Fill(dt)
                     End Using
                 Catch ex As Exception
-                    Throw New Exception("Controller Error (GetAllEmployees): " & ex.Message)
+                    Throw New Exception("Controller Error (GetEmployeeChanges): " & ex.Message)
                 End Try
             End Using
         End Using
