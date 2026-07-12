@@ -392,33 +392,64 @@ Module ProductController
         Console.WriteLine("=== END OF DATATABLE CONSOLE DUMP ===")
     End Sub
 
+    ' Password hashing uses PBKDF2 (SHA-256) with a random per-user salt.
+    ' Stored format: "pbkdf2$<iterations>$<saltBase64>$<hashBase64>".
+    Private Const Pbkdf2Prefix As String = "pbkdf2"
+    Private Const Pbkdf2Iterations As Integer = 100000
+    Private Const SaltSize As Integer = 16   ' 128-bit salt
+    Private Const KeySize As Integer = 32    ' 256-bit derived key
+
     Public Function HashPassword(password As String) As String
-        ' Convert the plain text password string into an array of raw bytes
-        Dim passwordBytes As Byte() = Encoding.UTF8.GetBytes(password)
+        Dim salt(SaltSize - 1) As Byte
+        RandomNumberGenerator.Fill(salt)
 
-        ' Compute the SHA256 hash representation of those bytes
-        Dim hashedBytes As Byte() = SHA256.HashData(passwordBytes)
+        Dim key As Byte() = Rfc2898DeriveBytes.Pbkdf2(
+            password, salt, Pbkdf2Iterations, HashAlgorithmName.SHA256, KeySize)
 
-        ' Convert the resulting byte array back into a readable Hexadecimal string
-        Dim sb As New StringBuilder()
-        For i As Integer = 0 To hashedBytes.Length - 1
-            sb.Append(hashedBytes(i).ToString("x2"))
-        Next
-
-        Return sb.ToString()
+        Return String.Join("$", Pbkdf2Prefix, Pbkdf2Iterations.ToString(),
+                           Convert.ToBase64String(salt), Convert.ToBase64String(key))
     End Function
 
     Public Function CompareHash(password As String, storedHash As String) As Boolean
-        ' If either field is empty, it's an immediate failure
         If String.IsNullOrEmpty(password) OrElse String.IsNullOrEmpty(storedHash) Then
             Return False
         End If
 
-        ' Hash the incoming plain text login attempt using your existing function
-        Dim inputHash As String = HashPassword(password)
+        If storedHash.StartsWith(Pbkdf2Prefix & "$", StringComparison.Ordinal) Then
+            Dim parts As String() = storedHash.Split("$"c)
+            If parts.Length <> 4 Then Return False
 
-        ' Perform a case-insensitive string comparison to avoid any minor hex casing bugs
-        Return String.Equals(inputHash, storedHash, StringComparison.OrdinalIgnoreCase)
+            Dim iterations As Integer
+            If Not Integer.TryParse(parts(1), iterations) Then Return False
+
+            Dim salt As Byte()
+            Dim expected As Byte()
+            Try
+                salt = Convert.FromBase64String(parts(2))
+                expected = Convert.FromBase64String(parts(3))
+            Catch
+                Return False
+            End Try
+
+            Dim actual As Byte() = Rfc2898DeriveBytes.Pbkdf2(
+                password, salt, iterations, HashAlgorithmName.SHA256, expected.Length)
+
+            ' Constant-time comparison to avoid timing attacks.
+            Return CryptographicOperations.FixedTimeEquals(actual, expected)
+        End If
+
+        ' Legacy accounts stored a plain SHA-256 hex digest (no salt). Verify those for
+        ' backward compatibility so existing users can still log in.
+        Return String.Equals(LegacySha256Hex(password), storedHash, StringComparison.OrdinalIgnoreCase)
+    End Function
+
+    Private Function LegacySha256Hex(password As String) As String
+        Dim hashedBytes As Byte() = SHA256.HashData(Encoding.UTF8.GetBytes(password))
+        Dim sb As New StringBuilder()
+        For Each b As Byte In hashedBytes
+            sb.Append(b.ToString("x2"))
+        Next
+        Return sb.ToString()
     End Function
 
 End Module
