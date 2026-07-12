@@ -288,4 +288,36 @@
             MessageBox.Show("Failed to apply bulk purchase.")
         End If
     End Sub
+
+    ' Applies friendly column headers and highlights low-stock rows. Runs whenever the grid
+    ' (re)binds, which includes after a search filter changes.
+    Private Sub dgvProducts_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvProducts.DataBindingComplete
+        SetProductHeader("product_id", "ID")
+        SetProductHeader("product_name", "Product")
+        SetProductHeader("category", "Category")
+        SetProductHeader("unit_price", "Unit Price")
+        SetProductHeader("quantity", "Qty")
+        SetProductHeader("unit", "Unit")
+        SetProductHeader("reorder_treshold", "Reorder At")
+        SetProductHeader("tax_rate", "Tax Rate")
+
+        ' Flag rows where stock has dropped to or below the reorder threshold.
+        For Each row As DataGridViewRow In dgvProducts.Rows
+            Dim qty As Object = row.Cells("quantity").Value
+            Dim reorder As Object = row.Cells("reorder_treshold").Value
+            If IsNumeric(qty) AndAlso IsNumeric(reorder) AndAlso Convert.ToDecimal(qty) <= Convert.ToDecimal(reorder) Then
+                row.DefaultCellStyle.BackColor = Color.MistyRose
+                row.DefaultCellStyle.ForeColor = Color.Firebrick
+            Else
+                row.DefaultCellStyle.BackColor = Color.Empty
+                row.DefaultCellStyle.ForeColor = Color.Empty
+            End If
+        Next
+    End Sub
+
+    Private Sub SetProductHeader(columnName As String, headerText As String)
+        If dgvProducts.Columns.Contains(columnName) Then
+            dgvProducts.Columns(columnName).HeaderText = headerText
+        End If
+    End Sub
 End Class

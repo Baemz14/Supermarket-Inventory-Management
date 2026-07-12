@@ -37,4 +37,14 @@
             dgvEmployeeChanges.DataSource = selectedEmployeeChanges
         End If
     End Sub
+
+    ' Hide the internal id column and give the name column a friendly header.
+    Private Sub dgvEmployees_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgvEmployees.DataBindingComplete
+        If dgvEmployees.Columns.Contains("employee_id") Then
+            dgvEmployees.Columns("employee_id").Visible = False
+        End If
+        If dgvEmployees.Columns.Contains("employee_name") Then
+            dgvEmployees.Columns("employee_name").HeaderText = "Employee"
+        End If
+    End Sub
 End Class
