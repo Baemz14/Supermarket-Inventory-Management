@@ -51,8 +51,8 @@ Partial Class frmMain
         ' mnuAddProduct
         ' 
         mnuAddProduct.Name = "mnuAddProduct"
-        mnuAddProduct.Size = New Size(129, 29)
-        mnuAddProduct.Text = "Add Product"
+        mnuAddProduct.Size = New Size(113, 29)
+        mnuAddProduct.Text = "Add To DB"
         ' 
         ' EmployeesToolStripMenuItem
         ' 

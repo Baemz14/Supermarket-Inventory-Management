@@ -1,12 +1,7 @@
 ﻿Notes:
 haram tulis function utk bukak db, baem je buat func db dlm controller.vb
 
-login n register:
-[SIAP] bug - bila logout pastu try login semula app closed
-[SIAP] boleh hide/show password
-
-Controller:
-buat column names dlm GetEmployeeChanges() nicer
+tambah bagian add supplier dan add category
 
 -------dev notes------
 
