@@ -2,13 +2,8 @@
 haram tulis function utk bukak db, baem je buat func db dlm controller.vb
 
 login n register:
-<<<<<<< HEAD
-boleh hide/show password
 [SIAP] bug - bila logout pastu try login semula app closed
-=======
 [SIAP] boleh hide/show password
-bug - bila logout pastu try login semula app closed
->>>>>>> 599c98359d4b9f3cf927756acb61c85c316cd0bd
 
 Controller:
 buat column names dlm GetEmployeeChanges() nicer
