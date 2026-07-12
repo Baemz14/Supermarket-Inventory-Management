@@ -39,11 +39,21 @@
     End Sub
 
     Private Sub mnuLogout_Click(sender As Object, e As EventArgs) Handles mnuLogout.Click
+        ' Re-authenticate on this same window instead of opening a new frmMain and
+        ' closing this one. Closing this form would shut the whole app down (the
+        ' shutdown mode is "exit after the main form closes"), which was the logout bug.
         SessionManager.Logout()
+        pnlContent.Controls.Clear()
         Me.Hide()
-        Dim freshForm As New frmMain()
-        freshForm.Show()
-        Me.Close()
+
+        Using loginWindow As New frmLogin()
+            If loginWindow.ShowDialog() = DialogResult.OK Then
+                SwitchScreen(New ucView)
+                Me.Show()
+            Else
+                Application.Exit()
+            End If
+        End Using
     End Sub
 
     Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeesToolStripMenuItem.Click
