@@ -30,6 +30,7 @@ Partial Class frmLogin
         btnLogin = New Button()
         Label4 = New Label()
         btnRegister = New Button()
+        chkShowPassword = New CheckBox()
         SuspendLayout()
         ' 
         ' Label1
@@ -72,13 +73,24 @@ Partial Class frmLogin
         txtPassword.Name = "txtPassword"
         txtPassword.Size = New Size(150, 31)
         txtPassword.TabIndex = 4
-        ' 
+        txtPassword.UseSystemPasswordChar = True
+        '
+        ' chkShowPassword
+        '
+        chkShowPassword.AutoSize = True
+        chkShowPassword.Location = New Point(245, 212)
+        chkShowPassword.Name = "chkShowPassword"
+        chkShowPassword.Size = New Size(163, 29)
+        chkShowPassword.TabIndex = 5
+        chkShowPassword.Text = "Show password"
+        chkShowPassword.UseVisualStyleBackColor = True
+        '
         ' btnLogin
-        ' 
+        '
         btnLogin.Location = New Point(245, 254)
         btnLogin.Name = "btnLogin"
         btnLogin.Size = New Size(112, 34)
-        btnLogin.TabIndex = 5
+        btnLogin.TabIndex = 6
         btnLogin.Text = "login"
         btnLogin.UseVisualStyleBackColor = True
         ' 
@@ -88,7 +100,7 @@ Partial Class frmLogin
         Label4.Location = New Point(277, 314)
         Label4.Name = "Label4"
         Label4.Size = New Size(32, 25)
-        Label4.TabIndex = 6
+        Label4.TabIndex = 7
         Label4.Text = "Or"
         ' 
         ' btnRegister
@@ -96,7 +108,7 @@ Partial Class frmLogin
         btnRegister.Location = New Point(191, 360)
         btnRegister.Name = "btnRegister"
         btnRegister.Size = New Size(204, 34)
-        btnRegister.TabIndex = 7
+        btnRegister.TabIndex = 8
         btnRegister.Text = "Register new account"
         btnRegister.UseVisualStyleBackColor = True
         ' 
@@ -107,6 +119,7 @@ Partial Class frmLogin
         ClientSize = New Size(603, 434)
         Controls.Add(btnRegister)
         Controls.Add(Label4)
+        Controls.Add(chkShowPassword)
         Controls.Add(btnLogin)
         Controls.Add(txtPassword)
         Controls.Add(txtName)
@@ -128,4 +141,5 @@ Partial Class frmLogin
     Friend WithEvents btnLogin As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents btnRegister As Button
+    Friend WithEvents chkShowPassword As CheckBox
 End Class

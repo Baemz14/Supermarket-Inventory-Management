@@ -14,6 +14,10 @@
         End Using
     End Sub
 
+    Private Sub chkShowPassword_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowPassword.CheckedChanged
+        txtPassword.UseSystemPasswordChar = Not chkShowPassword.Checked
+    End Sub
+
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         If Not (String.IsNullOrEmpty(txtName.Text) Or String.IsNullOrEmpty(txtPassword.Text)) Then
             If SessionManager.Login(txtName.Text, txtPassword.Text) Then

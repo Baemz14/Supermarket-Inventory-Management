@@ -31,6 +31,7 @@ Partial Class frmRegister
         txtConfPassword = New TextBox()
         btnRegister = New Button()
         btnCancel = New Button()
+        chkShowPassword = New CheckBox()
         SuspendLayout()
         ' 
         ' Label1
@@ -82,6 +83,7 @@ Partial Class frmRegister
         txtPassword.Name = "txtPassword"
         txtPassword.Size = New Size(150, 31)
         txtPassword.TabIndex = 5
+        txtPassword.UseSystemPasswordChar = True
         ' 
         ' txtConfPassword
         ' 
@@ -89,13 +91,24 @@ Partial Class frmRegister
         txtConfPassword.Name = "txtConfPassword"
         txtConfPassword.Size = New Size(150, 31)
         txtConfPassword.TabIndex = 6
-        ' 
+        txtConfPassword.UseSystemPasswordChar = True
+        '
+        ' chkShowPassword
+        '
+        chkShowPassword.AutoSize = True
+        chkShowPassword.Location = New Point(245, 262)
+        chkShowPassword.Name = "chkShowPassword"
+        chkShowPassword.Size = New Size(163, 29)
+        chkShowPassword.TabIndex = 7
+        chkShowPassword.Text = "Show password"
+        chkShowPassword.UseVisualStyleBackColor = True
+        '
         ' btnRegister
-        ' 
+        '
         btnRegister.Location = New Point(162, 320)
         btnRegister.Name = "btnRegister"
         btnRegister.Size = New Size(112, 34)
-        btnRegister.TabIndex = 7
+        btnRegister.TabIndex = 8
         btnRegister.Text = "Register"
         btnRegister.UseVisualStyleBackColor = True
         ' 
@@ -104,7 +117,7 @@ Partial Class frmRegister
         btnCancel.Location = New Point(340, 320)
         btnCancel.Name = "btnCancel"
         btnCancel.Size = New Size(112, 34)
-        btnCancel.TabIndex = 8
+        btnCancel.TabIndex = 9
         btnCancel.Text = "Cancel"
         btnCancel.UseVisualStyleBackColor = True
         ' 
@@ -115,6 +128,7 @@ Partial Class frmRegister
         ClientSize = New Size(603, 434)
         Controls.Add(btnCancel)
         Controls.Add(btnRegister)
+        Controls.Add(chkShowPassword)
         Controls.Add(txtConfPassword)
         Controls.Add(txtPassword)
         Controls.Add(txtName)
@@ -138,4 +152,5 @@ Partial Class frmRegister
     Friend WithEvents txtConfPassword As TextBox
     Friend WithEvents btnRegister As Button
     Friend WithEvents btnCancel As Button
+    Friend WithEvents chkShowPassword As CheckBox
 End Class

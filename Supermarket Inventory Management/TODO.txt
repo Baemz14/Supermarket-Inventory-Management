@@ -2,7 +2,7 @@
 haram tulis function utk bukak db, baem je buat func db dlm controller.vb
 
 login n register:
-boleh hide/show password
+[SIAP] boleh hide/show password
 bug - bila logout pastu try login semula app closed
 
 Controller:
