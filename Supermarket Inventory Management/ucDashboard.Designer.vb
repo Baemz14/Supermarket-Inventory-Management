@@ -23,7 +23,6 @@ Partial Class ucDashboard
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Label1 = New Label()
-        Button1 = New Button()
         lblUsername = New Label()
         SuspendLayout()
         ' 
@@ -35,16 +34,7 @@ Partial Class ucDashboard
         Label1.Size = New Size(100, 25)
         Label1.TabIndex = 0
         Label1.Text = "Dashboard"
-        ' 
-        ' Button1
-        ' 
-        Button1.Location = New Point(434, 414)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(112, 34)
-        Button1.TabIndex = 1
-        Button1.Text = "Henlo"
-        Button1.UseVisualStyleBackColor = True
-        ' 
+        '
         ' lblUsername
         ' 
         lblUsername.AutoSize = True
@@ -59,7 +49,6 @@ Partial Class ucDashboard
         AutoScaleDimensions = New SizeF(10F, 25F)
         AutoScaleMode = AutoScaleMode.Font
         Controls.Add(lblUsername)
-        Controls.Add(Button1)
         Controls.Add(Label1)
         MinimumSize = New Size(1525, 924)
         Name = "ucDashboard"
@@ -69,7 +58,6 @@ Partial Class ucDashboard
     End Sub
 
     Friend WithEvents Label1 As Label
-    Friend WithEvents Button1 As Button
     Friend WithEvents lblUsername As Label
 
 End Class

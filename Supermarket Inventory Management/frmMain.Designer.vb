@@ -92,7 +92,7 @@ Partial Class frmMain
         MinimumSize = New Size(1547, 1013)
         Name = "frmMain"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "Form1"
+        Text = "Supermarket Inventory Management"
         MenuStrip1.ResumeLayout(False)
         MenuStrip1.PerformLayout()
         ResumeLayout(False)

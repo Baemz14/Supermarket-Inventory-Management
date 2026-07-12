@@ -1,4 +1,10 @@
 ﻿Public Class frmRegister
+
+    Private Sub frmRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = "Register"
+        Me.AcceptButton = btnRegister   ' Enter submits the registration
+    End Sub
+
     Private Sub btnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
         If Not (String.IsNullOrEmpty(txtName.Text) Or String.IsNullOrEmpty(txtPassword.Text) Or String.IsNullOrEmpty(txtConfPassword.Text)) Then
             If Not String.Compare(txtPassword.Text, txtConfPassword.Text) = 0 Then
