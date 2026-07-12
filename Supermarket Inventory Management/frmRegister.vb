@@ -21,6 +21,11 @@
         End If
     End Sub
 
+    Private Sub chkShowPassword_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowPassword.CheckedChanged
+        txtPassword.UseSystemPasswordChar = Not chkShowPassword.Checked
+        txtConfPassword.UseSystemPasswordChar = Not chkShowPassword.Checked
+    End Sub
+
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
