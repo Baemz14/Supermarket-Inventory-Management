@@ -1,5 +1,10 @@
 ﻿Public Class frmLogin
 
+    Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = "Login"
+        Me.AcceptButton = btnLogin   ' Enter submits the login
+    End Sub
+
     Private Sub btnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
         Me.Hide()
 
