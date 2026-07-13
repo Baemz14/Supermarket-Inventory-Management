@@ -43,6 +43,7 @@ Partial Class ucProductForm
         btnAddProduct = New Button()
         GroupBox1 = New GroupBox()
         GroupBox2 = New GroupBox()
+        btnAddSupplier = New Button()
         txtSupplierEmail = New TextBox()
         txtSupplierPhone = New TextBox()
         txtSupplierName = New TextBox()
@@ -50,7 +51,6 @@ Partial Class ucProductForm
         Label2 = New Label()
         Label1 = New Label()
         GroupBox3 = New GroupBox()
-        btnAddSupplier = New Button()
         CType(numUnitPrice, ComponentModel.ISupportInitialize).BeginInit()
         CType(numQuantity, ComponentModel.ISupportInitialize).BeginInit()
         CType(numReorderThreshold, ComponentModel.ISupportInitialize).BeginInit()
@@ -267,6 +267,15 @@ Partial Class ucProductForm
         GroupBox2.TabStop = False
         GroupBox2.Text = "Add New Supplier"
         ' 
+        ' btnAddSupplier
+        ' 
+        btnAddSupplier.Location = New Point(339, 255)
+        btnAddSupplier.Name = "btnAddSupplier"
+        btnAddSupplier.Size = New Size(183, 45)
+        btnAddSupplier.TabIndex = 6
+        btnAddSupplier.Text = "Add Supplier"
+        btnAddSupplier.UseVisualStyleBackColor = True
+        ' 
         ' txtSupplierEmail
         ' 
         txtSupplierEmail.Location = New Point(279, 171)
@@ -317,21 +326,12 @@ Partial Class ucProductForm
         ' 
         ' GroupBox3
         ' 
-        GroupBox3.Location = New Point(806, 452)
+        GroupBox3.Location = New Point(806, 432)
         GroupBox3.Name = "GroupBox3"
         GroupBox3.Size = New Size(653, 319)
         GroupBox3.TabIndex = 22
         GroupBox3.TabStop = False
         GroupBox3.Text = "Add New Category"
-        ' 
-        ' btnAddSupplier
-        ' 
-        btnAddSupplier.Location = New Point(339, 255)
-        btnAddSupplier.Name = "btnAddSupplier"
-        btnAddSupplier.Size = New Size(183, 45)
-        btnAddSupplier.TabIndex = 6
-        btnAddSupplier.Text = "Add Supplier"
-        btnAddSupplier.UseVisualStyleBackColor = True
         ' 
         ' ucProductForm
         ' 

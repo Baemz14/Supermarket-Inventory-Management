@@ -193,6 +193,11 @@
             Return
         End If
 
+        If quantityChange = 0 Then
+            MessageBox.Show("Quantity change cannot be zero.")
+            Return
+        End If
+
         Dim reason As String = cboReason.SelectedItem.ToString()
         quantityChange = If(isPositiveChange(reason), quantityChange, -quantityChange)
 
@@ -223,6 +228,14 @@
             Return
         End If
 
+        If newPrice <= 0 Then
+            MessageBox.Show("New price must be greater than zero.")
+            Return
+        ElseIf newPrice = selectedRow("unit_price") Then
+            MessageBox.Show("New price is the same as the current price. No change made.")
+            Return
+        End If
+
         Dim isSuccess As Boolean = ChangeProductPrice(selectedRow("product_id"), newPrice, SessionManager.CurrentId)
         If isSuccess Then
             MessageBox.Show("Price change applied successfully.")
@@ -247,6 +260,11 @@
         Dim quantityToBuy As Decimal
         If Not Decimal.TryParse(txtQuantityBuy.Text, quantityToBuy) Then
             MessageBox.Show("Please enter a valid numeric value for the quantity to buy.")
+            Return
+        End If
+
+        If quantityToBuy <= 0 Then
+            MessageBox.Show("Quantity to buy must be greater than zero.")
             Return
         End If
 

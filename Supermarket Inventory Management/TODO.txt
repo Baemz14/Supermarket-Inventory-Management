@@ -1,7 +1,14 @@
-﻿Notes:
-haram tulis function utk bukak db, baem je buat func db dlm controller.vb
-
+﻿
+Add to DB:
 tambah bagian add supplier dan add category
+
+Employee:
+assingkan column date/time
+apply keyword search n reason filter
+
+Account:
+tunjuk logged in user changes
+cantikkan ui
 
 -------dev notes------
 

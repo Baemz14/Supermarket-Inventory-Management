@@ -104,15 +104,16 @@ Module ProductController
         Dim dt As New DataTable()
         Using conn As SQLiteConnection = GetConnection()
             Dim query As String = "SELECT p.product_name AS 'Product', " &
-                        "pc.change_desc AS 'Reason', " &
-                        "pc.quantity_changed AS 'Qty Changed', " &
-                        "pc.price_changed AS 'New Price', " &
-                        "pc.change_datetime AS 'Date / Time', " &
-                        "p.quantity AS 'Current Qty' " &
-                        "FROM product_change pc " &
-                        "INNER JOIN product p ON pc.product_id = p.product_id " &
-                        "WHERE pc.employee_id = @EmpId " &
-                        "ORDER BY pc.change_datetime DESC"
+                      "pc.change_desc AS 'Reason', " &
+                      "pc.quantity_changed AS 'Qty Changed', " &
+                      "pc.quantity_after AS 'Qty After', " &
+                      "pc.price_changed AS 'Price Changed', " &
+                      "pc.price_after AS 'Price After', " &
+                      "pc.change_datetime AS 'Date / Time' " &
+                      "FROM product_change pc " &
+                      "INNER JOIN product p ON pc.product_id = p.product_id " &
+                      "WHERE pc.employee_id = @EmpId " &
+                      "ORDER BY pc.change_datetime DESC"
             Using cmd As New SQLiteCommand(query, conn)
                 cmd.Parameters.AddWithValue("@EmpId", employeeId)
                 Try
@@ -305,10 +306,27 @@ Module ProductController
 
                 Using transaction As SQLiteTransaction = conn.BeginTransaction()
 
-                    Dim updateQuery As String = "UPDATE product SET quantity = quantity + @Change WHERE product_id = @ProdID"
+                    Dim currentQty As Decimal = 0
+                    Dim selectQuery As String = "SELECT quantity FROM product WHERE product_id = @ProdID"
+
+                    Using selectCmd As New SQLiteCommand(selectQuery, conn, transaction)
+                        selectCmd.Parameters.AddWithValue("@ProdID", productId)
+                        Dim result As Object = selectCmd.ExecuteScalar()
+
+                        If result IsNot Nothing AndAlso Not IsDBNull(result) Then
+                            currentQty = Convert.ToDecimal(result)
+                        Else
+                            transaction.Rollback()
+                            Return False
+                        End If
+                    End Using
+
+                    Dim quantityAfter As Decimal = currentQty + quantityChange
+
+                    Dim updateQuery As String = "UPDATE product SET quantity = @NewQty WHERE product_id = @ProdID"
 
                     Using updateCmd As New SQLiteCommand(updateQuery, conn, transaction)
-                        updateCmd.Parameters.AddWithValue("@Change", quantityChange)
+                        updateCmd.Parameters.AddWithValue("@NewQty", quantityAfter)
                         updateCmd.Parameters.AddWithValue("@ProdID", productId)
 
                         Dim rowsAffected As Integer = updateCmd.ExecuteNonQuery()
@@ -320,13 +338,14 @@ Module ProductController
                     End Using
 
                     Dim logQuery As String = "INSERT INTO product_change " &
-                                         "(product_id, change_desc, quantity_changed, employee_id, change_datetime, price_changed) " &
-                                         "VALUES (@ProdID, @Desc, @QtyChanged, @EmpID, datetime('now', 'localtime'), 0)"
+                                     "(product_id, change_desc, quantity_changed, quantity_after, employee_id, change_datetime, price_changed) " &
+                                     "VALUES (@ProdID, @Desc, @QtyChanged, @QtyAfter, @EmpID, datetime('now', 'localtime'), 0)"
 
                     Using logCmd As New SQLiteCommand(logQuery, conn, transaction)
                         logCmd.Parameters.AddWithValue("@ProdID", productId)
                         logCmd.Parameters.AddWithValue("@Desc", changeDesc)
                         logCmd.Parameters.AddWithValue("@QtyChanged", quantityChange)
+                        logCmd.Parameters.AddWithValue("@QtyAfter", quantityAfter)
                         logCmd.Parameters.AddWithValue("@EmpID", employeeId)
 
                         logCmd.ExecuteNonQuery()
@@ -347,29 +366,58 @@ Module ProductController
 
     Public Function ChangeProductPrice(productId As Integer, newPrice As Decimal, employeeId As Integer) As Boolean
         Dim isSuccess As Boolean = False
+
         Using conn As SQLiteConnection = GetConnection()
             Try
                 conn.Open()
                 Using transaction As SQLiteTransaction = conn.BeginTransaction()
+
+                    Dim currentQty As Decimal = 0
+                    Dim currentPrice As Decimal = 0
+                    Dim selectQuery As String = "SELECT quantity, unit_price FROM product WHERE product_id = @ProdID"
+
+                    Using selectCmd As New SQLiteCommand(selectQuery, conn, transaction)
+                        selectCmd.Parameters.AddWithValue("@ProdID", productId)
+                        Using reader As SQLiteDataReader = selectCmd.ExecuteReader()
+                            If reader.Read() Then
+                                currentQty = Convert.ToDecimal(reader("quantity"))
+                                currentPrice = Convert.ToDecimal(reader("unit_price"))
+                            Else
+                                transaction.Rollback()
+                                Return False
+                            End If
+                        End Using
+                    End Using
+
+                    Dim priceDelta As Decimal = newPrice - currentPrice
+
                     Dim updateQuery As String = "UPDATE product SET unit_price = @NewPrice WHERE product_id = @ProdID"
+
                     Using updateCmd As New SQLiteCommand(updateQuery, conn, transaction)
                         updateCmd.Parameters.AddWithValue("@NewPrice", newPrice)
                         updateCmd.Parameters.AddWithValue("@ProdID", productId)
+
                         Dim rowsAffected As Integer = updateCmd.ExecuteNonQuery()
                         If rowsAffected = 0 Then
                             transaction.Rollback()
                             Return False
                         End If
                     End Using
+
                     Dim logQuery As String = "INSERT INTO product_change " &
-                                         "(product_id, change_desc, quantity_changed, employee_id, change_datetime, price_changed) " &
-                                         "VALUES (@ProdID, 'Price Change', 0, @EmpID, datetime('now', 'localtime'), @NewPrice)"
+                                     "(product_id, change_desc, quantity_changed, quantity_after, employee_id, change_datetime, price_changed, price_after) " &
+                                     "VALUES (@ProdID, 'Price Change', 0, @QtyAfter, @EmpID, datetime('now', 'localtime'), @PriceDelta, @PriceAfter)"
+
                     Using logCmd As New SQLiteCommand(logQuery, conn, transaction)
                         logCmd.Parameters.AddWithValue("@ProdID", productId)
+                        logCmd.Parameters.AddWithValue("@QtyAfter", currentQty)
                         logCmd.Parameters.AddWithValue("@EmpID", employeeId)
-                        logCmd.Parameters.AddWithValue("@NewPrice", newPrice)
+                        logCmd.Parameters.AddWithValue("@PriceDelta", priceDelta)
+                        logCmd.Parameters.AddWithValue("@PriceAfter", newPrice)
+
                         logCmd.ExecuteNonQuery()
                     End Using
+
                     transaction.Commit()
                     isSuccess = True
                 End Using
@@ -377,6 +425,7 @@ Module ProductController
                 Throw New Exception("Database Ledger Error: Failed to execute price adjustment. Details: " & ex.Message)
             End Try
         End Using
+
         Return isSuccess
     End Function
 
