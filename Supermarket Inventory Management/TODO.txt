@@ -1,8 +1,4 @@
 ﻿
-Account:
-tunjuk logged in user changes
-cantikkan ui
-
 DB schema:
 category_name / supplier_name takde UNIQUE constraint - boleh add nama sama
 dua kali (controller punya "already exists" error tak pernah trigger)
