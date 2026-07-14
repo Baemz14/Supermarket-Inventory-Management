@@ -19,11 +19,10 @@
     Private Sub SwitchScreen(ByVal selectedUC As UserControl)
         pnlContent.Controls.Clear()
         pnlContent.AutoScroll = True
-        selectedUC.Dock = DockStyle.None
-        selectedUC.Size = pnlContent.ClientSize
-        selectedUC.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Bottom
+        ' Each screen lays itself out with TableLayoutPanels, so it can simply fill
+        ' the window. Below the screen's MinimumSize the panel shows scrollbars.
+        selectedUC.Dock = DockStyle.Fill
         pnlContent.Controls.Add(selectedUC)
-        selectedUC.BringToFront()
     End Sub
 
     Private Sub mnuDashboard_Click(sender As Object, e As EventArgs) Handles mnuDashboard.Click
