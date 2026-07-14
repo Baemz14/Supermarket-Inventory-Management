@@ -60,6 +60,57 @@ Public Class ucProductForm
         End Try
     End Sub
 
+    Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles btnAddSupplier.Click
+        Dim name As String = txtSupplierName.Text.Trim()
+        If name.Length = 0 Then
+            MessageBox.Show("Please enter a supplier name.")
+            Return
+        End If
+
+        Dim email As String = txtSupplierEmail.Text.Trim()
+        If email.Length > 0 AndAlso Not email.Contains("@"c) Then
+            MessageBox.Show("Please enter a valid email address (or leave it empty).")
+            Return
+        End If
+
+        Try
+            If AddSupplier(name, txtSupplierPhone.Text.Trim(), email) Then
+                MessageBox.Show("Supplier added successfully.")
+                txtSupplierName.Clear()
+                txtSupplierPhone.Clear()
+                txtSupplierEmail.Clear()
+                LoadDropdowns()   ' so the new supplier shows up in the product form
+            Else
+                MessageBox.Show("Failed to add supplier.")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error adding supplier: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnAddCategory_Click(sender As Object, e As EventArgs) Handles btnAddCategory.Click
+        Dim name As String = txtCategoryName.Text.Trim()
+        If name.Length = 0 Then
+            MessageBox.Show("Please enter a category name.")
+            Return
+        End If
+
+        Try
+            Dim taxRate As Decimal = numTaxRate.Value / 100D   ' entered as %, stored as a 0-1 rate
+
+            If AddCategory(name, taxRate) Then
+                MessageBox.Show("Category added successfully.")
+                txtCategoryName.Clear()
+                numTaxRate.Value = 0
+                LoadDropdowns()   ' so the new category shows up in the product form
+            Else
+                MessageBox.Show("Failed to add category.")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error adding category: " & ex.Message)
+        End Try
+    End Sub
+
     Private Sub ResetForm()
         txtProductName.Clear()
         txtUnit.Clear()

@@ -109,7 +109,8 @@ Module ProductController
                       "pc.quantity_after AS 'Qty After', " &
                       "pc.price_changed AS 'Price Changed', " &
                       "pc.price_after AS 'Price After', " &
-                      "pc.change_datetime AS 'Date / Time' " &
+                      "date(pc.change_datetime) AS 'Date', " &
+                      "time(pc.change_datetime) AS 'Time' " &
                       "FROM product_change pc " &
                       "INNER JOIN product p ON pc.product_id = p.product_id " &
                       "WHERE pc.employee_id = @EmpId " &

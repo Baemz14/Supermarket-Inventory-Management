@@ -51,13 +51,20 @@ Partial Class ucProductForm
         Label2 = New Label()
         Label1 = New Label()
         GroupBox3 = New GroupBox()
+        btnAddCategory = New Button()
+        numTaxRate = New NumericUpDown()
+        txtCategoryName = New TextBox()
+        lblTaxRate = New Label()
+        lblCategoryName = New Label()
         CType(numUnitPrice, ComponentModel.ISupportInitialize).BeginInit()
         CType(numQuantity, ComponentModel.ISupportInitialize).BeginInit()
         CType(numReorderThreshold, ComponentModel.ISupportInitialize).BeginInit()
         CType(numBulkQuantity, ComponentModel.ISupportInitialize).BeginInit()
         CType(numBulkDiscount, ComponentModel.ISupportInitialize).BeginInit()
+        CType(numTaxRate, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         GroupBox2.SuspendLayout()
+        GroupBox3.SuspendLayout()
         SuspendLayout()
         ' 
         ' lblName
@@ -323,15 +330,62 @@ Partial Class ucProductForm
         Label1.Size = New Size(133, 25)
         Label1.TabIndex = 0
         Label1.Text = "Supplier Name:"
-        ' 
+        '
         ' GroupBox3
-        ' 
+        '
+        GroupBox3.Controls.Add(btnAddCategory)
+        GroupBox3.Controls.Add(numTaxRate)
+        GroupBox3.Controls.Add(txtCategoryName)
+        GroupBox3.Controls.Add(lblTaxRate)
+        GroupBox3.Controls.Add(lblCategoryName)
         GroupBox3.Location = New Point(806, 432)
         GroupBox3.Name = "GroupBox3"
         GroupBox3.Size = New Size(653, 319)
         GroupBox3.TabIndex = 22
         GroupBox3.TabStop = False
         GroupBox3.Text = "Add New Category"
+        '
+        ' btnAddCategory
+        '
+        btnAddCategory.Location = New Point(339, 200)
+        btnAddCategory.Name = "btnAddCategory"
+        btnAddCategory.Size = New Size(183, 45)
+        btnAddCategory.TabIndex = 4
+        btnAddCategory.Text = "Add Category"
+        btnAddCategory.UseVisualStyleBackColor = True
+        '
+        ' numTaxRate
+        '
+        numTaxRate.DecimalPlaces = 2
+        numTaxRate.Location = New Point(279, 116)
+        numTaxRate.Name = "numTaxRate"
+        numTaxRate.Size = New Size(200, 31)
+        numTaxRate.TabIndex = 3
+        '
+        ' txtCategoryName
+        '
+        txtCategoryName.Location = New Point(279, 61)
+        txtCategoryName.Name = "txtCategoryName"
+        txtCategoryName.Size = New Size(277, 31)
+        txtCategoryName.TabIndex = 2
+        '
+        ' lblTaxRate
+        '
+        lblTaxRate.AutoSize = True
+        lblTaxRate.Location = New Point(94, 118)
+        lblTaxRate.Name = "lblTaxRate"
+        lblTaxRate.Size = New Size(119, 25)
+        lblTaxRate.TabIndex = 1
+        lblTaxRate.Text = "Tax Rate (%):"
+        '
+        ' lblCategoryName
+        '
+        lblCategoryName.AutoSize = True
+        lblCategoryName.Location = New Point(74, 61)
+        lblCategoryName.Name = "lblCategoryName"
+        lblCategoryName.Size = New Size(139, 25)
+        lblCategoryName.TabIndex = 0
+        lblCategoryName.Text = "Category Name:"
         ' 
         ' ucProductForm
         ' 
@@ -348,10 +402,13 @@ Partial Class ucProductForm
         CType(numReorderThreshold, ComponentModel.ISupportInitialize).EndInit()
         CType(numBulkQuantity, ComponentModel.ISupportInitialize).EndInit()
         CType(numBulkDiscount, ComponentModel.ISupportInitialize).EndInit()
+        CType(numTaxRate, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         GroupBox2.ResumeLayout(False)
         GroupBox2.PerformLayout()
+        GroupBox3.ResumeLayout(False)
+        GroupBox3.PerformLayout()
         ResumeLayout(False)
     End Sub
     Friend WithEvents lblName As Label
@@ -376,7 +433,11 @@ Partial Class ucProductForm
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents lblCategoryName As Label
+    Friend WithEvents txtCategoryName As TextBox
+    Friend WithEvents lblTaxRate As Label
+    Friend WithEvents numTaxRate As NumericUpDown
+    Friend WithEvents btnAddCategory As Button
     Friend WithEvents txtSupplierPhone As TextBox
     Friend WithEvents txtSupplierName As TextBox
     Friend WithEvents Label3 As Label

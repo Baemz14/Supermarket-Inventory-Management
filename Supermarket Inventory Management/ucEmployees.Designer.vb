@@ -139,8 +139,9 @@ Partial Class ucEmployees
         ' 
         ' cboReasonFilter
         ' 
+        cboReasonFilter.DropDownStyle = ComboBoxStyle.DropDownList
         cboReasonFilter.FormattingEnabled = True
-        cboReasonFilter.Items.AddRange(New Object() {"Sold", "Arrived", "Removed", "Damaged", "Expired", "Shrinkage", "Internal Usage", "Customer Return", "Audit Correction", "bulk buy", "price change"})
+        cboReasonFilter.Items.AddRange(New Object() {"(All)", "Sold", "Arrived", "Removed", "Damaged", "Expired", "Shrinkage", "Internal Usage", "Customer Return", "Audit Correction", "Bulk Buy", "Price Change"})
         cboReasonFilter.Location = New Point(925, 436)
         cboReasonFilter.Name = "cboReasonFilter"
         cboReasonFilter.Size = New Size(205, 33)

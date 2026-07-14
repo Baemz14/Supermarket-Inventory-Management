@@ -1,14 +1,11 @@
 ﻿
-Add to DB:
-tambah bagian add supplier dan add category
-
-Employee:
-assingkan column date/time
-apply keyword search n reason filter
-
 Account:
 tunjuk logged in user changes
 cantikkan ui
+
+DB schema:
+category_name / supplier_name takde UNIQUE constraint - boleh add nama sama
+dua kali (controller punya "already exists" error tak pernah trigger)
 
 -------dev notes------
 
