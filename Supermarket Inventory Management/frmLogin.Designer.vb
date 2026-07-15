@@ -166,11 +166,12 @@ Partial Class frmLogin
         ' 
         chkShowPassword.AutoSize = True
         chkShowPassword.FlatStyle = FlatStyle.Flat
+        chkShowPassword.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         chkShowPassword.ForeColor = Color.White
         chkShowPassword.Location = New Point(142, 274)
         chkShowPassword.Margin = New Padding(2)
         chkShowPassword.Name = "chkShowPassword"
-        chkShowPassword.Size = New Size(130, 24)
+        chkShowPassword.Size = New Size(132, 24)
         chkShowPassword.TabIndex = 5
         chkShowPassword.Text = "Show password"
         chkShowPassword.UseVisualStyleBackColor = True
@@ -231,7 +232,7 @@ Partial Class frmLogin
         Margin = New Padding(2)
         Name = "frmLogin"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "Supermarket Inventory Management"
+        Text = "Login"
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(PictureBox5, ComponentModel.ISupportInitialize).EndInit()
         Panel6.ResumeLayout(False)
