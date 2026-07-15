@@ -238,7 +238,7 @@ Module ProductController
             Dim query As String = "INSERT INTO category (category_name, tax_rate) VALUES (@Name, @Tax)"
 
             Using cmd As New SQLiteCommand(query, conn)
-                cmd.Parameters.AddWithValue("@Name", categoryName)
+                cmd.Parameters.AddWithValue("@Name", categoryName.Trim())
                 cmd.Parameters.AddWithValue("@Tax", taxRate)
 
                 Try
@@ -259,7 +259,7 @@ Module ProductController
                              "VALUES (@Name, @Phone, @Email)"
 
             Using cmd As New SQLiteCommand(query, conn)
-                cmd.Parameters.AddWithValue("@Name", supplierName)
+                cmd.Parameters.AddWithValue("@Name", supplierName.Trim())
                 cmd.Parameters.AddWithValue("@Phone", phone)
                 cmd.Parameters.AddWithValue("@Email", email)
 
@@ -267,7 +267,7 @@ Module ProductController
                     conn.Open()
                     Return cmd.ExecuteNonQuery() > 0
                 Catch ex As SQLiteException When ex.ResultCode = SQLiteErrorCode.Constraint
-                    Throw New Exception("Database Error: Supplier details violate database rules.")
+                    Throw New Exception("Database Error: This supplier name already exists.")
                 Catch ex As Exception
                     Throw New Exception("System Error: " & ex.Message)
                 End Try

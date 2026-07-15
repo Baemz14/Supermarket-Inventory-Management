@@ -40,7 +40,7 @@ Partial Class ucSales
         Label4 = New Label()
         Label3 = New Label()
         Label2 = New Label()
-        Button1 = New Button()
+        btnConfirmTransaction = New Button()
         CType(dgvProducts, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         GroupBox2.SuspendLayout()
@@ -79,7 +79,7 @@ Partial Class ucSales
         ' 
         ' GroupBox1
         ' 
-        GroupBox1.Controls.Add(Button1)
+        GroupBox1.Controls.Add(btnConfirmTransaction)
         GroupBox1.Controls.Add(lvCart)
         GroupBox1.Location = New Point(844, 76)
         GroupBox1.Name = "GroupBox1"
@@ -193,14 +193,14 @@ Partial Class ucSales
         Label2.TabIndex = 0
         Label2.Text = "Product:"
         ' 
-        ' Button1
+        ' btnConfirmTransaction
         ' 
-        Button1.Location = New Point(104, 626)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(187, 34)
-        Button1.TabIndex = 1
-        Button1.Text = "Confirm Transaction"
-        Button1.UseVisualStyleBackColor = True
+        btnConfirmTransaction.Location = New Point(104, 626)
+        btnConfirmTransaction.Name = "btnConfirmTransaction"
+        btnConfirmTransaction.Size = New Size(187, 34)
+        btnConfirmTransaction.TabIndex = 1
+        btnConfirmTransaction.Text = "Confirm Transaction"
+        btnConfirmTransaction.UseVisualStyleBackColor = True
         ' 
         ' ucSales
         ' 
@@ -239,6 +239,6 @@ Partial Class ucSales
     Friend WithEvents txtQuantityToBuy As TextBox
     Friend WithEvents lblStockQuantity As Label
     Friend WithEvents btnAddToCart As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnConfirmTransaction As Button
 
 End Class
