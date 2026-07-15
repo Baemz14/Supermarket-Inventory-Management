@@ -25,5 +25,16 @@ Namespace My
 
     Partial Friend Class MyApplication
 
+        ' Ensure the database has the indexes/constraints the app relies on before
+        ' the first form (and any queries) run.
+        Private Sub MyApplication_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
+            Try
+                EnsureSchema()
+            Catch ex As Exception
+                MessageBox.Show("Failed to prepare the database: " & ex.Message,
+                                "Startup Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End Try
+        End Sub
+
     End Class
 End Namespace
