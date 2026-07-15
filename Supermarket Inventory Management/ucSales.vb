@@ -6,6 +6,14 @@ Public Class ucSales
     Dim selectedRow As DataRow
 
     Private Sub ucSales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        UiTheme.StyleScreen(Me)
+        UiTheme.StyleGrid(dgvProducts)
+        UiTheme.StylePrimaryButton(btnAddToCart)
+
+        For Each valueLabel In {lblProduct, lblPrice, lblStockQuantity}
+            UiTheme.StyleValueLabel(valueLabel)
+        Next
+
         loadProductList()
     End Sub
 

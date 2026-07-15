@@ -6,6 +6,14 @@
     Dim selectedChange As DataRow
 
     Private Sub ucEmployees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        UiTheme.StyleScreen(Me)
+        UiTheme.StyleGrid(dgvEmployees)
+        UiTheme.StyleGrid(dgvEmployeeChanges)
+
+        For Each valueLabel In {lblProduct, lblReason, lblChangedAnswer, lblBeforeAnswer, lblAfterAnswer}
+            UiTheme.StyleValueLabel(valueLabel)
+        Next
+
         Try
             employeeTable = GetAllEmployees()
         Catch ex As Exception

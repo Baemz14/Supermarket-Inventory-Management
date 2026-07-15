@@ -1,5 +1,8 @@
 ﻿Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        UiTheme.StyleScreen(Me)
+        UiTheme.StyleMenu(MenuStrip1)
+
         If Not SessionManager.IsLoggedIn Then
             Using loginWindow As New frmLogin()
                 Dim authResult As DialogResult = loginWindow.ShowDialog()

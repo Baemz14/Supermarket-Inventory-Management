@@ -1,6 +1,11 @@
 Public Class ucProductForm
 
     Private Sub ucProductForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        UiTheme.StyleScreen(Me)
+        UiTheme.StylePrimaryButton(btnAddProduct)
+        UiTheme.StylePrimaryButton(btnAddSupplier)
+        UiTheme.StylePrimaryButton(btnAddCategory)
+
         LoadDropdowns()
     End Sub
 

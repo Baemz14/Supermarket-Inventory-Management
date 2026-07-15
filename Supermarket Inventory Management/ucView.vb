@@ -4,6 +4,22 @@
     Dim selectedRow As DataRow
 
     Private Sub ucView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        UiTheme.StyleScreen(Me)
+        UiTheme.StyleGrid(dgvProducts)
+
+        UiTheme.StylePrimaryButton(btnQuantityConfirm)
+        UiTheme.StylePrimaryButton(btnPriceConfirm)
+        UiTheme.StylePrimaryButton(btnBulkBuyConfirm)
+        UiTheme.StyleSecondaryButton(btnResetQuantity)
+        UiTheme.StyleSecondaryButton(btnPriceReset)
+        UiTheme.StyleSecondaryButton(btnBulkBuyReset)
+
+        For Each valueLabel In {lblQuantity, lblUnitInQuantity, lblSupplier, lblDiscount,
+                                lblMinBulk, lblUnitInSupplier, lblPrice, lblBulkPrice,
+                                lblBulkDiscountPrice, lblPriceAfterBulk}
+            UiTheme.StyleValueLabel(valueLabel)
+        Next
+
         loadProductList()
     End Sub
 

@@ -3,6 +3,13 @@
     Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Login"
         Me.AcceptButton = btnLogin   ' Enter submits the login
+
+        UiTheme.StyleScreen(Me)
+        UiTheme.StylePrimaryButton(btnLogin)
+        UiTheme.StyleSecondaryButton(btnRegister)
+        Label1.Text = "Sign In"
+        Label1.Font = New Font("Segoe UI", 14F, FontStyle.Bold)
+        Label1.ForeColor = UiTheme.Primary
     End Sub
 
     Private Sub btnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
