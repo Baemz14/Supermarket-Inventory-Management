@@ -31,13 +31,21 @@
         If ProductList Is Nothing Then Return
 
         Dim keyword As String = txtKeyword.Text.Trim()
-        If keyword.Length = 0 Then
-            ProductList.DefaultView.RowFilter = ""
-        Else
+        Dim filterExpression As String = ""
+
+        If keyword.Length > 0 Then
             Dim safe As String = EscapeLikeValue(keyword)
-            ProductList.DefaultView.RowFilter =
-                "product_name LIKE '%" & safe & "%' OR category LIKE '%" & safe & "%'"
+            filterExpression = "(product_name LIKE '%" & safe & "%' OR category LIKE '%" & safe & "%')"
         End If
+
+        If chWarning.Checked Then
+            If filterExpression.Length > 0 Then
+                filterExpression &= " AND "
+            End If
+            filterExpression &= "quantity <= reorder_treshold"
+        End If
+
+        ProductList.DefaultView.RowFilter = filterExpression
     End Sub
 
     Private Sub dgvProducts_SelectionChanged(sender As Object, e As EventArgs) Handles dgvProducts.SelectionChanged
@@ -322,4 +330,9 @@
             dgvProducts.Columns(columnName).HeaderText = headerText
         End If
     End Sub
+
+    Private Sub chWarning_CheckedChanged(sender As Object, e As EventArgs) Handles chWarning.CheckedChanged
+        ApplyKeywordFilter()
+    End Sub
+
 End Class

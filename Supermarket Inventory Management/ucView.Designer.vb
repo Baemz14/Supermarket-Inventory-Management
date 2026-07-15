@@ -26,6 +26,8 @@ Partial Class ucView
         flpSearch = New FlowLayoutPanel()
         Label1 = New Label()
         txtKeyword = New TextBox()
+        FlowLayoutPanel1 = New FlowLayoutPanel()
+        chWarning = New CheckBox()
         dgvProducts = New DataGridView()
         GroupBox1 = New GroupBox()
         tlpQuantity = New TableLayoutPanel()
@@ -34,12 +36,12 @@ Partial Class ucView
         lblUnitInQuantity = New Label()
         Label8 = New Label()
         cboReason = New ComboBox()
-        Label10 = New Label()
-        txtQuantityChange = New TextBox()
-        lblQuantChangeIsPos = New Label()
         flpQuantityButtons = New FlowLayoutPanel()
         btnQuantityConfirm = New Button()
         btnResetQuantity = New Button()
+        txtQuantityChange = New TextBox()
+        Label10 = New Label()
+        lblQuantChangeIsPos = New Label()
         tlpBottomLeft = New TableLayoutPanel()
         GroupBox2 = New GroupBox()
         tlpSupplier = New TableLayoutPanel()
@@ -75,6 +77,7 @@ Partial Class ucView
         btnPriceReset = New Button()
         tlpRoot.SuspendLayout()
         flpSearch.SuspendLayout()
+        FlowLayoutPanel1.SuspendLayout()
         CType(dgvProducts, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         tlpQuantity.SuspendLayout()
@@ -104,10 +107,11 @@ Partial Class ucView
         tlpRoot.Location = New Point(0, 0)
         tlpRoot.Name = "tlpRoot"
         tlpRoot.Padding = New Padding(15)
-        tlpRoot.RowCount = 3
+        tlpRoot.RowCount = 4
         tlpRoot.RowStyles.Add(New RowStyle())
         tlpRoot.RowStyles.Add(New RowStyle(SizeType.Percent, 52F))
         tlpRoot.RowStyles.Add(New RowStyle(SizeType.Percent, 48F))
+        tlpRoot.RowStyles.Add(New RowStyle(SizeType.Absolute, 20F))
         tlpRoot.Size = New Size(1525, 924)
         tlpRoot.TabIndex = 0
         ' 
@@ -117,9 +121,10 @@ Partial Class ucView
         flpSearch.AutoSizeMode = AutoSizeMode.GrowAndShrink
         flpSearch.Controls.Add(Label1)
         flpSearch.Controls.Add(txtKeyword)
+        flpSearch.Controls.Add(FlowLayoutPanel1)
         flpSearch.Location = New Point(18, 18)
         flpSearch.Name = "flpSearch"
-        flpSearch.Size = New Size(465, 37)
+        flpSearch.Size = New Size(765, 41)
         flpSearch.TabIndex = 0
         flpSearch.WrapContents = False
         ' 
@@ -127,7 +132,7 @@ Partial Class ucView
         ' 
         Label1.Anchor = AnchorStyles.Left
         Label1.AutoSize = True
-        Label1.Location = New Point(3, 6)
+        Label1.Location = New Point(3, 8)
         Label1.Name = "Label1"
         Label1.Size = New Size(93, 25)
         Label1.TabIndex = 0
@@ -136,10 +141,30 @@ Partial Class ucView
         ' txtKeyword
         ' 
         txtKeyword.Anchor = AnchorStyles.Left
-        txtKeyword.Location = New Point(102, 3)
+        txtKeyword.Location = New Point(102, 5)
         txtKeyword.Name = "txtKeyword"
         txtKeyword.Size = New Size(360, 31)
         txtKeyword.TabIndex = 1
+        ' 
+        ' FlowLayoutPanel1
+        ' 
+        FlowLayoutPanel1.AutoSize = True
+        FlowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink
+        FlowLayoutPanel1.Controls.Add(chWarning)
+        FlowLayoutPanel1.Location = New Point(468, 3)
+        FlowLayoutPanel1.Name = "FlowLayoutPanel1"
+        FlowLayoutPanel1.Size = New Size(294, 35)
+        FlowLayoutPanel1.TabIndex = 2
+        ' 
+        ' chWarning
+        ' 
+        chWarning.AutoSize = True
+        chWarning.Location = New Point(3, 3)
+        chWarning.Name = "chWarning"
+        chWarning.Size = New Size(288, 29)
+        chWarning.TabIndex = 0
+        chWarning.Text = "Show lower than order treshold"
+        chWarning.UseVisualStyleBackColor = True
         ' 
         ' dgvProducts
         ' 
@@ -147,7 +172,7 @@ Partial Class ucView
         dgvProducts.AllowUserToDeleteRows = False
         dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvProducts.Dock = DockStyle.Fill
-        dgvProducts.Location = New Point(18, 61)
+        dgvProducts.Location = New Point(18, 65)
         dgvProducts.Margin = New Padding(3, 3, 12, 12)
         dgvProducts.MultiSelect = False
         dgvProducts.Name = "dgvProducts"
@@ -155,18 +180,18 @@ Partial Class ucView
         dgvProducts.RowHeadersVisible = False
         dgvProducts.RowHeadersWidth = 62
         dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvProducts.Size = New Size(917, 427)
+        dgvProducts.Size = New Size(917, 415)
         dgvProducts.TabIndex = 1
         ' 
         ' GroupBox1
         ' 
         GroupBox1.Controls.Add(tlpQuantity)
         GroupBox1.Dock = DockStyle.Fill
-        GroupBox1.Location = New Point(950, 61)
+        GroupBox1.Location = New Point(950, 65)
         GroupBox1.Margin = New Padding(3, 3, 3, 12)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Padding = New Padding(12)
-        GroupBox1.Size = New Size(557, 427)
+        GroupBox1.Size = New Size(557, 415)
         GroupBox1.TabIndex = 2
         GroupBox1.TabStop = False
         GroupBox1.Text = "Update Quantity"
@@ -195,7 +220,7 @@ Partial Class ucView
         tlpQuantity.RowStyles.Add(New RowStyle())
         tlpQuantity.RowStyles.Add(New RowStyle())
         tlpQuantity.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
-        tlpQuantity.Size = New Size(533, 379)
+        tlpQuantity.Size = New Size(533, 367)
         tlpQuantity.TabIndex = 0
         ' 
         ' Label2
@@ -252,35 +277,6 @@ Partial Class ucView
         cboReason.Size = New Size(297, 33)
         cboReason.TabIndex = 4
         ' 
-        ' Label10
-        ' 
-        Label10.Anchor = AnchorStyles.Left
-        Label10.AutoSize = True
-        Label10.Location = New Point(3, 101)
-        Label10.Name = "Label10"
-        Label10.Size = New Size(149, 25)
-        Label10.TabIndex = 5
-        Label10.Text = "Quantity Change:"
-        ' 
-        ' txtQuantityChange
-        ' 
-        txtQuantityChange.Anchor = AnchorStyles.Left Or AnchorStyles.Right
-        txtQuantityChange.Location = New Point(158, 96)
-        txtQuantityChange.Margin = New Padding(3, 3, 3, 8)
-        txtQuantityChange.Name = "txtQuantityChange"
-        txtQuantityChange.Size = New Size(297, 31)
-        txtQuantityChange.TabIndex = 6
-        ' 
-        ' lblQuantChangeIsPos
-        ' 
-        lblQuantChangeIsPos.Anchor = AnchorStyles.Left
-        lblQuantChangeIsPos.AutoSize = True
-        lblQuantChangeIsPos.Location = New Point(461, 101)
-        lblQuantChangeIsPos.Name = "lblQuantChangeIsPos"
-        lblQuantChangeIsPos.Size = New Size(48, 25)
-        lblQuantChangeIsPos.TabIndex = 7
-        lblQuantChangeIsPos.Text = "(+/-)"
-        ' 
         ' flpQuantityButtons
         ' 
         flpQuantityButtons.Anchor = AnchorStyles.Right
@@ -314,6 +310,35 @@ Partial Class ucView
         btnResetQuantity.Text = "Reset"
         btnResetQuantity.UseVisualStyleBackColor = True
         ' 
+        ' txtQuantityChange
+        ' 
+        txtQuantityChange.Anchor = AnchorStyles.Left Or AnchorStyles.Right
+        txtQuantityChange.Location = New Point(158, 96)
+        txtQuantityChange.Margin = New Padding(3, 3, 3, 8)
+        txtQuantityChange.Name = "txtQuantityChange"
+        txtQuantityChange.Size = New Size(297, 31)
+        txtQuantityChange.TabIndex = 6
+        ' 
+        ' Label10
+        ' 
+        Label10.Anchor = AnchorStyles.Left
+        Label10.AutoSize = True
+        Label10.Location = New Point(3, 101)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(149, 25)
+        Label10.TabIndex = 5
+        Label10.Text = "Quantity Change:"
+        ' 
+        ' lblQuantChangeIsPos
+        ' 
+        lblQuantChangeIsPos.Anchor = AnchorStyles.Left
+        lblQuantChangeIsPos.AutoSize = True
+        lblQuantChangeIsPos.Location = New Point(461, 101)
+        lblQuantChangeIsPos.Name = "lblQuantChangeIsPos"
+        lblQuantChangeIsPos.Size = New Size(48, 25)
+        lblQuantChangeIsPos.TabIndex = 7
+        lblQuantChangeIsPos.Text = "(+/-)"
+        ' 
         ' tlpBottomLeft
         ' 
         tlpBottomLeft.ColumnCount = 2
@@ -322,12 +347,12 @@ Partial Class ucView
         tlpBottomLeft.Controls.Add(GroupBox2, 0, 0)
         tlpBottomLeft.Controls.Add(GroupBox3, 1, 0)
         tlpBottomLeft.Dock = DockStyle.Fill
-        tlpBottomLeft.Location = New Point(15, 500)
+        tlpBottomLeft.Location = New Point(15, 492)
         tlpBottomLeft.Margin = New Padding(0)
         tlpBottomLeft.Name = "tlpBottomLeft"
         tlpBottomLeft.RowCount = 1
         tlpBottomLeft.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
-        tlpBottomLeft.Size = New Size(932, 409)
+        tlpBottomLeft.Size = New Size(932, 396)
         tlpBottomLeft.TabIndex = 3
         ' 
         ' GroupBox2
@@ -338,7 +363,7 @@ Partial Class ucView
         GroupBox2.Margin = New Padding(3, 3, 6, 3)
         GroupBox2.Name = "GroupBox2"
         GroupBox2.Padding = New Padding(12)
-        GroupBox2.Size = New Size(457, 403)
+        GroupBox2.Size = New Size(457, 390)
         GroupBox2.TabIndex = 0
         GroupBox2.TabStop = False
         GroupBox2.Text = "Supplier Data"
@@ -365,7 +390,7 @@ Partial Class ucView
         tlpSupplier.RowStyles.Add(New RowStyle())
         tlpSupplier.RowStyles.Add(New RowStyle())
         tlpSupplier.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
-        tlpSupplier.Size = New Size(433, 355)
+        tlpSupplier.Size = New Size(433, 342)
         tlpSupplier.TabIndex = 0
         ' 
         ' Label3
@@ -461,7 +486,7 @@ Partial Class ucView
         GroupBox3.Margin = New Padding(6, 3, 3, 3)
         GroupBox3.Name = "GroupBox3"
         GroupBox3.Padding = New Padding(12)
-        GroupBox3.Size = New Size(457, 403)
+        GroupBox3.Size = New Size(457, 390)
         GroupBox3.TabIndex = 1
         GroupBox3.TabStop = False
         GroupBox3.Text = "Buy in Bulk"
@@ -490,7 +515,7 @@ Partial Class ucView
         tlpBulk.RowStyles.Add(New RowStyle())
         tlpBulk.RowStyles.Add(New RowStyle())
         tlpBulk.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
-        tlpBulk.Size = New Size(433, 355)
+        tlpBulk.Size = New Size(433, 342)
         tlpBulk.TabIndex = 0
         ' 
         ' Label4
@@ -612,10 +637,10 @@ Partial Class ucView
         ' 
         GroupBox4.Controls.Add(tlpPrice)
         GroupBox4.Dock = DockStyle.Fill
-        GroupBox4.Location = New Point(950, 503)
+        GroupBox4.Location = New Point(950, 495)
         GroupBox4.Name = "GroupBox4"
         GroupBox4.Padding = New Padding(12)
-        GroupBox4.Size = New Size(557, 403)
+        GroupBox4.Size = New Size(557, 390)
         GroupBox4.TabIndex = 4
         GroupBox4.TabStop = False
         GroupBox4.Text = "Update Price"
@@ -638,7 +663,7 @@ Partial Class ucView
         tlpPrice.RowStyles.Add(New RowStyle())
         tlpPrice.RowStyles.Add(New RowStyle())
         tlpPrice.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
-        tlpPrice.Size = New Size(533, 355)
+        tlpPrice.Size = New Size(533, 342)
         tlpPrice.TabIndex = 0
         ' 
         ' Label6
@@ -726,6 +751,8 @@ Partial Class ucView
         tlpRoot.PerformLayout()
         flpSearch.ResumeLayout(False)
         flpSearch.PerformLayout()
+        FlowLayoutPanel1.ResumeLayout(False)
+        FlowLayoutPanel1.PerformLayout()
         CType(dgvProducts, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
         tlpQuantity.ResumeLayout(False)
@@ -797,6 +824,8 @@ Partial Class ucView
     Friend WithEvents flpPriceButtons As FlowLayoutPanel
     Friend WithEvents btnPriceConfirm As Button
     Friend WithEvents btnPriceReset As Button
+    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
+    Friend WithEvents chWarning As CheckBox
 
 End Class
 

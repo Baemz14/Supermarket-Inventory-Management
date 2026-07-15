@@ -3,6 +3,10 @@ DB schema:
 category_name / supplier_name takde UNIQUE constraint - boleh add nama sama
 dua kali (controller punya "already exists" error tak pernah trigger)
 
+Counter Sales:
+buat logic draw pada lcCart, then click confirm transaction to call the controller.ChangeProductQuantity() for every item in cart with reason param = "Sold"
+make it so once confirm transaction, print the receipt and clear the cart, make sure the receipt also take into account the product's category tax rate attr, and allow user to print the receipt
+
 -------dev notes------
 
 change reason:

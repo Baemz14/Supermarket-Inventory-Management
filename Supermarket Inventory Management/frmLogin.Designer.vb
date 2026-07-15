@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmLogin
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmLogin
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
         PictureBox1 = New PictureBox()
@@ -98,7 +98,7 @@ Partial Class frmLogin
         ' 
         Label3.AutoSize = True
         Label3.FlatStyle = FlatStyle.Flat
-        Label3.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label3.ForeColor = Color.White
         Label3.Location = New Point(44, 237)
         Label3.Margin = New Padding(2, 0, 2, 0)
@@ -112,7 +112,7 @@ Partial Class frmLogin
         Label5.AutoSize = True
         Label5.BackColor = Color.Transparent
         Label5.FlatStyle = FlatStyle.Flat
-        Label5.Font = New Font("Segoe UI Semibold", 8F, FontStyle.Bold)
+        Label5.Font = New Font("Segoe UI Semibold", 8.0F, FontStyle.Bold)
         Label5.ForeColor = Color.White
         Label5.Location = New Point(55, 137)
         Label5.Margin = New Padding(2, 0, 2, 0)
@@ -126,7 +126,7 @@ Partial Class frmLogin
         ' 
         Label1.AutoSize = True
         Label1.FlatStyle = FlatStyle.Flat
-        Label1.Font = New Font("Segoe UI", 16F, FontStyle.Bold)
+        Label1.Font = New Font("Segoe UI", 16.0F, FontStyle.Bold)
         Label1.ForeColor = Color.White
         Label1.Location = New Point(72, 100)
         Label1.Margin = New Padding(2, 0, 2, 0)
@@ -139,7 +139,7 @@ Partial Class frmLogin
         ' 
         Label2.AutoSize = True
         Label2.FlatStyle = FlatStyle.Flat
-        Label2.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label2.ForeColor = Color.White
         Label2.Location = New Point(44, 199)
         Label2.Margin = New Padding(2, 0, 2, 0)
@@ -152,7 +152,7 @@ Partial Class frmLogin
         ' 
         btnRegister.BackColor = Color.FromArgb(CByte(70), CByte(141), CByte(223))
         btnRegister.FlatStyle = FlatStyle.Popup
-        btnRegister.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnRegister.Font = New Font("Segoe UI Semibold", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnRegister.ForeColor = Color.White
         btnRegister.Location = New Point(76, 374)
         btnRegister.Margin = New Padding(2)
@@ -166,7 +166,7 @@ Partial Class frmLogin
         ' 
         chkShowPassword.AutoSize = True
         chkShowPassword.FlatStyle = FlatStyle.Flat
-        chkShowPassword.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        chkShowPassword.Font = New Font("Segoe UI Semibold", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         chkShowPassword.ForeColor = Color.White
         chkShowPassword.Location = New Point(142, 274)
         chkShowPassword.Margin = New Padding(2)
@@ -180,7 +180,7 @@ Partial Class frmLogin
         ' 
         btnLogin.BackColor = Color.FromArgb(CByte(70), CByte(141), CByte(223))
         btnLogin.FlatStyle = FlatStyle.Popup
-        btnLogin.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnLogin.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnLogin.ForeColor = Color.White
         btnLogin.Location = New Point(76, 312)
         btnLogin.Margin = New Padding(2)
@@ -202,7 +202,7 @@ Partial Class frmLogin
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label4.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label4.ForeColor = Color.White
         Label4.Location = New Point(161, 351)
         Label4.Margin = New Padding(2, 0, 2, 0)
@@ -223,7 +223,7 @@ Partial Class frmLogin
         ' 
         ' frmLogin
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(859, 511)
         Controls.Add(Panel1)
@@ -255,4 +255,5 @@ Partial Class frmLogin
     Friend WithEvents txtName As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents txtPassword As TextBox
+
 End Class
