@@ -9,13 +9,13 @@
         If Not (String.IsNullOrEmpty(txtName.Text) Or String.IsNullOrEmpty(txtPassword.Text) Or String.IsNullOrEmpty(txtConfPassword.Text)) Then
             If Not String.Compare(txtPassword.Text, txtConfPassword.Text) = 0 Then
                 MessageBox.Show("passwords do not match")
-            ElseIf ProductController.IsEmpNameExist(txtName.Text) Then
+            ElseIf IsEmpNameExist(txtName.Text) Then
                 MessageBox.Show("username already exist")
                 txtName.Text = ""
-            ElseIf ProductController.RegisterEmployee(txtName.Text, txtPassword.Text) Then
-                If SessionManager.Login(txtName.Text, txtPassword.Text) Then
-                    Me.DialogResult = DialogResult.OK
-                    Me.Close()
+            ElseIf RegisterEmployee(txtName.Text, txtPassword.Text) Then
+                If Login(txtName.Text, txtPassword.Text) Then
+                    DialogResult = DialogResult.OK
+                    Close
                 Else
                     MessageBox.Show("database error")
                 End If
@@ -35,5 +35,13 @@
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
+    End Sub
+
+    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
+
+    End Sub
+
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+
     End Sub
 End Class

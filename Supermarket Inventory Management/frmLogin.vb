@@ -2,7 +2,7 @@
 
     Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Login"
-        Me.AcceptButton = btnLogin   ' Enter submits the login
+        Me.AcceptButton = btnLogin
     End Sub
 
     Private Sub btnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
@@ -29,10 +29,26 @@
                 Me.DialogResult = DialogResult.OK
                 Me.Close()
             Else
-                MessageBox.Show("login credential wrong")
+                MessageBox.Show("Login Credential Incorrect")
             End If
         Else
-            MessageBox.Show("pls fill login creds")
+            MessageBox.Show("Please Fill Up Login Credentials")
         End If
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub Panel1_Paint_1(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
     End Sub
 End Class
