@@ -3,6 +3,13 @@
     Private Sub frmRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Register"
         Me.AcceptButton = btnRegister   ' Enter submits the registration
+
+        UiTheme.StyleScreen(Me)
+        UiTheme.StylePrimaryButton(btnRegister)
+        UiTheme.StyleSecondaryButton(btnCancel)
+        Label1.Text = "Create Account"
+        Label1.Font = New Font("Segoe UI", 14F, FontStyle.Bold)
+        Label1.ForeColor = UiTheme.Primary
     End Sub
 
     Private Sub btnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
