@@ -58,4 +58,8 @@
     Private Sub EmployeesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeesToolStripMenuItem.Click
         SwitchScreen(New ucEmployees)
     End Sub
+
+    Private Sub SalesCounterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesCounterToolStripMenuItem.Click
+        SwitchScreen(New ucSales)
+    End Sub
 End Class

@@ -74,20 +74,10 @@ Partial Class frmLogin
         txtPassword.Size = New Size(150, 31)
         txtPassword.TabIndex = 4
         txtPassword.UseSystemPasswordChar = True
-        '
-        ' chkShowPassword
-        '
-        chkShowPassword.AutoSize = True
-        chkShowPassword.Location = New Point(245, 212)
-        chkShowPassword.Name = "chkShowPassword"
-        chkShowPassword.Size = New Size(163, 29)
-        chkShowPassword.TabIndex = 5
-        chkShowPassword.Text = "Show password"
-        chkShowPassword.UseVisualStyleBackColor = True
-        '
+        ' 
         ' btnLogin
-        '
-        btnLogin.Location = New Point(245, 254)
+        ' 
+        btnLogin.Location = New Point(245, 277)
         btnLogin.Name = "btnLogin"
         btnLogin.Size = New Size(112, 34)
         btnLogin.TabIndex = 6
@@ -97,7 +87,7 @@ Partial Class frmLogin
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(277, 314)
+        Label4.Location = New Point(277, 332)
         Label4.Name = "Label4"
         Label4.Size = New Size(32, 25)
         Label4.TabIndex = 7
@@ -105,12 +95,22 @@ Partial Class frmLogin
         ' 
         ' btnRegister
         ' 
-        btnRegister.Location = New Point(191, 360)
+        btnRegister.Location = New Point(191, 374)
         btnRegister.Name = "btnRegister"
         btnRegister.Size = New Size(204, 34)
         btnRegister.TabIndex = 8
         btnRegister.Text = "Register new account"
         btnRegister.UseVisualStyleBackColor = True
+        ' 
+        ' chkShowPassword
+        ' 
+        chkShowPassword.AutoSize = True
+        chkShowPassword.Location = New Point(245, 230)
+        chkShowPassword.Name = "chkShowPassword"
+        chkShowPassword.Size = New Size(164, 29)
+        chkShowPassword.TabIndex = 5
+        chkShowPassword.Text = "Show password"
+        chkShowPassword.UseVisualStyleBackColor = True
         ' 
         ' frmLogin
         ' 

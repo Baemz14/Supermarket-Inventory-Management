@@ -29,13 +29,14 @@ Partial Class frmMain
         mnuDashboard = New ToolStripMenuItem()
         mnuLogout = New ToolStripMenuItem()
         pnlContent = New Panel()
+        SalesCounterToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         SuspendLayout()
         ' 
         ' MenuStrip1
         ' 
         MenuStrip1.ImageScalingSize = New Size(24, 24)
-        MenuStrip1.Items.AddRange(New ToolStripItem() {mnuView, mnuAddProduct, EmployeesToolStripMenuItem, mnuDashboard, mnuLogout})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {mnuView, SalesCounterToolStripMenuItem, mnuAddProduct, EmployeesToolStripMenuItem, mnuDashboard, mnuLogout})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
         MenuStrip1.Size = New Size(1525, 33)
@@ -81,6 +82,12 @@ Partial Class frmMain
         pnlContent.Size = New Size(1525, 924)
         pnlContent.TabIndex = 1
         ' 
+        ' SalesCounterToolStripMenuItem
+        ' 
+        SalesCounterToolStripMenuItem.Name = "SalesCounterToolStripMenuItem"
+        SalesCounterToolStripMenuItem.Size = New Size(136, 29)
+        SalesCounterToolStripMenuItem.Text = "Sales Counter"
+        ' 
         ' frmMain
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)
@@ -106,5 +113,6 @@ Partial Class frmMain
     Friend WithEvents pnlContent As Panel
     Friend WithEvents mnuLogout As ToolStripMenuItem
     Friend WithEvents EmployeesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SalesCounterToolStripMenuItem As ToolStripMenuItem
 
 End Class
